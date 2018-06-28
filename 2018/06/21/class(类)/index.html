@@ -16,7 +16,7 @@
 <meta property="og:site_name" content="朱雪的博客">
 <meta property="og:description" content="本文参考于ECMAScript 6 入门–阮一峰 http://es6.ruanyifeng.com/#docs/class  class的基本用法在JS语言中，生成实力对象的传统方法是通过构造函数。而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。 例： //定义类">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-28T05:02:35.786Z">
+<meta property="og:updated_time" content="2018-06-28T05:25:32.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="class的基本用法与继承（ES6）">
 <meta name="twitter:description" content="本文参考于ECMAScript 6 入门–阮一峰 http://es6.ruanyifeng.com/#docs/class  class的基本用法在JS语言中，生成实力对象的传统方法是通过构造函数。而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。 例： //定义类">
@@ -168,7 +168,7 @@
         <blockquote><p>本文参考于ECMAScript 6 入门–阮一峰 <a href="http://es6.ruanyifeng.com/#docs/class" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/class</a></p>
 </blockquote>
 <h2 id="class的基本用法"><a href="#class的基本用法" class="headerlink" title="class的基本用法"></a>class的基本用法</h2><p>在JS语言中，生成实力对象的传统方法是通过构造函数。<br>而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。<br>实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。</p>
-<table><tr><td bgcolor="#D1EEEE"><br>例： //定义类<br>    class Point {<br>        constructor(x, y) {<br>            this.x = x;<br>            this.y = y;<br>        }<br><br>        toString() {<br>            return ‘(‘ + this.x + ‘,’ + this.y + ‘)’;<br>        }<br>    }<br></td></tr></table><br>(上面代码定义了一个”类“，里面包含一个构造方法(constructor),代表实例对象的this关键字，因此可以说，ES5的构造函数Point对应的是ES6的Point类的构造方法。此例子中Point类除了构造方法，还定义了一个toString方法。)<br>(注：定义“类”的方法的时候，前面不需要加<font color="#dd0000">function</font>关键字，以及方法之间也<font color="#dd0000">不需要逗号隔开</font>，直接把函数定义放进去就ok了～)<br><br>### ES6的类，完全可以看作是构造函数的另一种方法。<br><br>构造函数的prototype属性，在ES6的“类”上面继续存在。事实上，<font color="#dd0000">类的所有方法都定义在了类的prototype属性上面</font>。因此，在类的实例上面调用方法，其实就是在调用原型上面的方法。<br><br><table><tr><td bgcolor="#D1EEEE"><br>例： class Point {<br>        constructor() {}<br>        toString() {}<br>        toValue() {}<br>    }<br>    //等同于<br>    Point.prototype = {<br>        constructor() {},<br>        toString() {},<br>        toValue() {},<br>    };<br></td></tr></table>
+<table><tr><td bgcolor="#D1EEEE"><br>例： //定义类<br>    class Point {<br>        constructor(x, y) {<br>            this.x = x;<br>            this.y = y;<br>        }<br><br>        toString() {<br>            return ‘(‘ + this.x + ‘,’ + this.y + ‘)’;<br>        }<br>    }<br></td></tr></table><br>(上面代码定义了一个”类“，里面包含一个构造方法(constructor),代表实例对象的this关键字，因此可以说，ES5的构造函数Point对应的是ES6的Point类的构造方法。此例子中Point类除了构造方法，还定义了一个toString方法。)<br>(注：定义“类”的方法的时候，前面不需要加<font color="#dd0000">function</font>关键字，以及方法之间也<font color="#dd0000">不需要逗号隔开</font>，直接把函数定义放进去就ok了～)<br><br>### ES6的类，完全可以看作是构造函数的另一种方法。<br>构造函数的prototype属性，在ES6的“类”上面继续存在。事实上，<font color="#dd0000">类的所有方法都定义在了类的prototype属性上面</font>。因此，在类的实例上面调用方法，其实就是在调用原型上面的方法。<br><br><table><tr><td bgcolor="#D1EEEE"><br>例： class Point {<br>        constructor() {}<br>        toString() {}<br>        toValue() {}<br>    }<br>    //等同于<br>    Point.prototype = {<br>        constructor() {},<br>        toString() {},<br>        toValue() {},<br>    };<br></td></tr></table>
 
 <p>另外，类的内部定义的所有方法都是不可枚举的。这一点与ES5行为不一样～</p>
 <h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h3><p>类和模块的内部，默认的就是严格模式，所以就不需要使用<font color="#dd0000">use strict</font>去指定运行模式～</p>
