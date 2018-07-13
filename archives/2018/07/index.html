@@ -6,20 +6,15 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>class的基本用法与继承（ES6） | 朱雪的博客</title>
+  <title>Archives: 2018/7 | 朱雪的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文参考于ECMAScript 6 入门–阮一峰 http://es6.ruanyifeng.com/#docs/class  class的基本用法在JS语言中，生成实力对象的传统方法是通过构造函数。而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。 例： //定义类">
-<meta name="keywords" content="Javascript,ES6,class">
-<meta property="og:type" content="article">
-<meta property="og:title" content="class的基本用法与继承（ES6）">
-<meta property="og:url" content="http://yoursite.com/2018/06/21/class(类)/index.html">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="朱雪的博客">
+<meta property="og:url" content="http://yoursite.com/archives/2018/07/index.html">
 <meta property="og:site_name" content="朱雪的博客">
-<meta property="og:description" content="本文参考于ECMAScript 6 入门–阮一峰 http://es6.ruanyifeng.com/#docs/class  class的基本用法在JS语言中，生成实力对象的传统方法是通过构造函数。而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。 例： //定义类">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-06-28T05:25:32.457Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="class的基本用法与继承（ES6）">
-<meta name="twitter:description" content="本文参考于ECMAScript 6 入门–阮一峰 http://es6.ruanyifeng.com/#docs/class  class的基本用法在JS语言中，生成实力对象的传统方法是通过构造函数。而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。 例： //定义类">
+<meta name="twitter:title" content="朱雪的博客">
   
     <link rel="alternative" href="/atom.xml" title="朱雪的博客" type="application/atom+xml">
   
@@ -145,218 +140,49 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-class(类)" class="article article-type-post " itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
+            
   
-    <h1 class="article-title" itemprop="name">
-      class的基本用法与继承（ES6）
+  
+    
+    
+      
+      
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2018" class="archive-year">2018</a>
+        </div>
+        <div class="archives">
+    
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2018/07/13/快捷键/" class="archive-article-date">
+  	<time datetime="2018-07-13T03:23:01.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-07-13</time>
+</a>
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2018/07/13/快捷键/">快捷键</a>
     </h1>
   
 
-        
-        <a href="/2018/06/21/class(类)/" class="archive-article-date">
-  	<time datetime="2018-06-21T11:07:40.229Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <blockquote><p>本文参考于ECMAScript 6 入门–阮一峰 <a href="http://es6.ruanyifeng.com/#docs/class" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/class</a></p>
-</blockquote>
-<h2 id="class的基本用法"><a href="#class的基本用法" class="headerlink" title="class的基本用法"></a>class的基本用法</h2><p>在JS语言中，生成实力对象的传统方法是通过构造函数。<br>而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。<br>实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。</p>
-<table><tr><td bgcolor="#D1EEEE"><br>例： //定义类<br>    class Point {<br>        constructor(x, y) {<br>            this.x = x;<br>            this.y = y;<br>        }<br><br>        toString() {<br>            return ‘(‘ + this.x + ‘,’ + this.y + ‘)’;<br>        }<br>    }<br></td></tr></table><br>(上面代码定义了一个”类“，里面包含一个构造方法(constructor),代表实例对象的this关键字，因此可以说，ES5的构造函数Point对应的是ES6的Point类的构造方法。此例子中Point类除了构造方法，还定义了一个toString方法。)<br>(注：定义“类”的方法的时候，前面不需要加<font color="#dd0000">function</font>关键字，以及方法之间也<font color="#dd0000">不需要逗号隔开</font>，直接把函数定义放进去就ok了～)<br><br>### ES6的类，完全可以看作是构造函数的另一种方法。<br>构造函数的prototype属性，在ES6的“类”上面继续存在。事实上，<font color="#dd0000">类的所有方法都定义在了类的prototype属性上面</font>。因此，在类的实例上面调用方法，其实就是在调用原型上面的方法。<br><br><table><tr><td bgcolor="#D1EEEE"><br>例： class Point {<br>        constructor() {}<br>        toString() {}<br>        toValue() {}<br>    }<br>    //等同于<br>    Point.prototype = {<br>        constructor() {},<br>        toString() {},<br>        toValue() {},<br>    };<br></td></tr></table>
+        <div class="article-info info-on-right">
+          
+          
 
-<p>另外，类的内部定义的所有方法都是不可枚举的。这一点与ES5行为不一样～</p>
-<h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h3><p>类和模块的内部，默认的就是严格模式，所以就不需要使用<font color="#dd0000">use strict</font>去指定运行模式～</p>
-<h3 id="constructor方法"><a href="#constructor方法" class="headerlink" title="constructor方法"></a>constructor方法</h3><p>constructor方法是类的默认方法，通过new命令生成对象实例时自动调用该方法。(一个类必须要有constrictor方法，如果没有显示定义，那么会被默认添加一个空的constroctor方法～)<br>constructor默认返回实例对象(this)，但是可以指定使他返回另外一个对象～<br>与ES5一样，1.实例的属性除非显式定义在其本身(即定义在this对象上)，否则都是定义在原型上(即定义在class上)～<br>          2.类的所有实例都共享一个原型对象～   </p>
-<h3 id="类不存在变量提升"><a href="#类不存在变量提升" class="headerlink" title="类不存在变量提升"></a>类不存在变量提升</h3><p>与ES5不同的是，类不存在变量提升～</p>
-<h3 id="私有方法与私有属性"><a href="#私有方法与私有属性" class="headerlink" title="私有方法与私有属性"></a>私有方法与私有属性</h3><p>ES6不提供私有方法，只能通过变通方法模拟实现～<br>可分为三种类型：<br>    1.在命名上加以区分–（例：<font color="#dd0000">_bar</font>，在名字前加上下划线，表示这是一个只限于内部使用的私有方法；这种命名不保险，在类外部，还是可以调用到这个方法～）<br>    2.将私有方法移出模块(因为模块内部的所有方法都是对外可见的)～<br>    3.利用Symbol值的唯一性，将私有方法的名字命名为一个Symbol值～<br>同样，ES6不支持私有属性，为class加私有属性有一个提案，即在属性名字之前加一个#号，例：#x～</p>
-<h3 id="this指向问题"><a href="#this指向问题" class="headerlink" title="this指向问题"></a>this指向问题</h3><p>类方法内若含有<font color="#dd0000">this</font>,那么它默认指向类的实例；但是当你单独使用该方法时，会有可能报错～</p>
-<table><tr><td bgcolor="#D1EEEE"><br>    例：class Logger {<br>            printName(name = ‘there’) {<br>                this.print(‘Hellp $(name)’);<br>            }<br>            print(text) {<br>                console.log(text);<br>            }<br>        }<br>        const logger = new Logger();<br>        const { printName } = logger;<br>        printName();  //报错，’print’ undefined<br>        //因为方法单独使用，this会指向方法运行时所在的环境，因此回找不到print方法而报错<br></td></tr></table><br>解决方法可为：<br>    1.在构造函数中绑定this～<br>    <table><tr><td bgcolor="#D1EEEE"><br>    例：class Logger {<br>            constructor() {<br>            this.printName = this.printName.bind(this);<br>            }<br>        }<br>    </td></tr></table><br>    2.使用箭头函数～<br>    3.使用Proxy，在获取方法的时候，自动获取this～<br><br>### name属性<br>本质上ES6的类只是ES5的构造函数的一层包装，所以函数的许多特想搜会被Class继承，包括name属性～<br><table><tr><td bgcolor="#D1EEEE"><br>例： class Point {}<br>    Point.name //“Point”<br>    //name属性总是会返回紧跟在class关键字后面的类名～<br></td></tr></table>
-
-<h3 id="class的静态方法"><a href="#class的静态方法" class="headerlink" title="class的静态方法"></a>class的静态方法</h3><p>ES6中的<font color="#dd0000">类相当于实例的原型</font>，所有在类中定义的方法都会被实例继承。<br>”静态方法“为：在一个方法前加上<font color="#dd0000">static</font>关键字，就表示这个方法不会被实例继承，而是直接通过类来调用～</p>
-<table><tr><td bgcolor="#D1EEEE"><br>例： class Foo {<br>        static classMethod() {<br>        return ‘hello’;<br>        }<br>    }<br>    Foo.classMethod() // ‘hello’<br>    var foo = new Foo();<br>    foo.classMethod()     // TypeError: foo.classMethod is not a function<br></td></tr></table><br>(注：<font color="#dd0000">若静态方法中包含this关键字，这个this指的是类，不是实例～</font>)<br>另外，静态方法可以与非静态方法重名，父类的静态方法可以被子类继承～<br>静态方法也可从<font color="#dd0000">super</font>对象上调用～<br><br><table><tr><td bgcolor="#D1EEEE"><br>例： class Foo {<br>        static classMethod() {<br>            return ‘hello’;<br>        }<br>    }<br>    class Bar extends Foo {<br>        static classMethod() {<br>            return super.classMethod() + ‘, too’;<br>        }<br>    }<br>    Bar.classMethod() // “hello, too”<br></td></tr></table>
-
-<h3 id="new-target属性"><a href="#new-target属性" class="headerlink" title="new.target属性"></a>new.target属性</h3><p>ES6为new引入了一个<font color="#dd0000">new.target</font>属性，一般用于构造函数之中，返回new命令作用于的构造函数～<br>若函数不是通过new命令调用的，那么new.target会返回undefined，由此可以用此来确定构造函数是怎么调用的～</p>
-<table><tr><td bgcolor="#D1EEEE"><br>例： function Person(name) {<br>        if (new.target !== undefined) {<br>            this.name = name;<br>        } else {<br>            throw new Error(‘必须使用 new 命令生成实例’);<br>        }<br>    }<br></td></tr></table>
-
-<table><tr><td bgcolor="#D1EEEE"><br>    // 另一种写法<br>    function Person(name) {<br>        if (new.target === Person) {<br>            this.name = name;<br>        } else {<br>            throw new Error(‘必须使用 new 命令生成实例’);<br>        }<br>    }<br><br>    var person = new Person(‘张三’); // 正确<br>    var notAPerson = Person.call(person, ‘张三’);  // 报错<br>class内部调用new.target，返回当前class～<br>(注：子类继承父类时，new.target会返回子类～在函数外部，使用new.target会报错～)<br></td></tr></table>
-
-<h2 id="Class的继承"><a href="#Class的继承" class="headerlink" title="Class的继承"></a>Class的继承</h2><p>class可以通过<font color="#dd0000">extends</font>关键字实现继承(继承父类的属性和方法)～</p>
-<p><table><tr><td bgcolor="#D1EEEE"><br>例： class Point {}<br>     class ColorPoint extends Point {}<br></td></tr></table><br>子类必须在constructor方法中调用super方法，否则新建实例时回报错。因为子类自己的this对象必须先通过父类的构造函数完成塑造，得到与父类同样的实例属性和方法，然后再对其加工，加上自己的实例属性和方法～<br>若不调用super方法，子类就得不到this对象～<br>ES6的继承机制与ES5不同，ES5继承的实质是先创造子类的实例对象this，然后再将父类的方法添加到this上面(Parent.apply(this)),而ES6的继承机制是先创造父类的实质对象this(所以必须先调用super方法)，然后再用子类的构造函数修改this～<br>(注：1.不管有没有显式定义，任何子类都会有constructor方法，若没有定义，会被默认添加；2.在子类的构造函数中，只有调用super之后，才可以使用this，否则会报错；3.父类的静态方法也会被子类继承～)</p>
-<h3 id="Object-getPrototypeOf-方法"><a href="#Object-getPrototypeOf-方法" class="headerlink" title="Object.getPrototypeOf()方法"></a>Object.getPrototypeOf()方法</h3><p>Object.getPrototypeOf()方法可以用来从子类上获取父类～</p>
-<p><table><tr><td bgcolor="#D1EEEE"><br>例：   Object.getPrototypeOf(ColorPoint) === Point    //true<br></td></tr></table><br>因此，可用此方法判断某个类是否继承了另一个类～</p>
-<h3 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h3><p><font color="#dd0000">super</font>关键字有两种使用方法：函数或对象～<br>1.函数：super作为函数调用时，代表父类的构造函数～(ES6要求，子类的构造函数必须执行一次super函数)<br>(注：1.super虽代表了父类的构造函数，但是返回的是子类的实例，即super内部的this指的子类；2.作为函数时，super()只能在子类的构造函数之中，用在其他地方回报错～)<br>2.对象：在普通方法中，指向父类的原型对象，在静态方法中，指向父类～<br>(注：1.由于super指向父类的原型对象，所以定义在父类实例上的方法或属性是无法通过super调用的；2.ES6规定，在子类普通方法中通过super调用父类的方法时，方法内部的this指向当前的子类实例；3.用在静态方法中，super将指向父类，而不是父类的原型对象；4.在子类的静态方法中调用父类的方法时，方法内部的this指向当前的子类，而不是子类的实例～)</p>
-<h3 id="class的prototype属性与proto属性"><a href="#class的prototype属性与proto属性" class="headerlink" title="class的prototype属性与proto属性"></a>class的prototype属性与<strong>proto</strong>属性</h3><p>1.子类的<strong>proto</strong>属性表示构造函数的继承，总是指向父类～<br>2.子类prototype属性的<strong>proto</strong>属性表示方法的继承，总是指向父类的prototype属性～<br>(注：可以理解为作为一个对象，子类的原型(<strong>proto</strong>属性)是父类；作为一个构造函数，子类的原型对象(prototype属性)是父类的原型对象(prototype属性)的实例～)</p>
-<h4 id="实例的proto属性"><a href="#实例的proto属性" class="headerlink" title="实例的proto属性"></a>实例的<strong>proto</strong>属性</h4><p>子类实例的<strong>proto</strong>属性的<strong>proto</strong>属性，指向父类实例的<strong>proto</strong>属性，即子类的原型的原型，是父类的原型</p>
-<!-- ## Quick Start
-
-### Create a new post
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a> –&gt;</p>
--->
-      
-
-      
-        <div class="page-reward">
-          <a href="javascript:;" class="page-reward-btn tooltip-top">
-            <div class="tooltip tooltip-east">
-            <span class="tooltip-item">
-              赏
-            </span>
-            <span class="tooltip-content">
-              <span class="tooltip-text">
-                <span class="tooltip-inner">
-                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果哦～<i class="icon icon-quo-right"></i></p>
-                  <div class="reward-box">
-                    
-                    
-                  </div>
-                </span>
-              </span>
-            </span>
-          </div>
-          </a>
         </div>
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ES6</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">class</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-
-      
-        
-<div class="share-btn share-icons tooltip-left">
-  <div class="tooltip tooltip-east">
-    <span class="tooltip-item">
-      <a href="javascript:;" class="share-sns share-outer">
-        <i class="icon icon-share"></i>
-      </a>
-    </span>
-    <span class="tooltip-content">
-      <div class="share-wrap">
-        <div class="share-icons">
-          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
-            <i class="icon icon-weibo"></i>
-          </a>
-          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
-            <i class="icon icon-weixin"></i>
-          </a>
-          <a class="qq share-sns" href="javascript:;" data-type="qq">
-            <i class="icon icon-qq"></i>
-          </a>
-          <a class="douban share-sns" href="javascript:;" data-type="douban">
-            <i class="icon icon-douban"></i>
-          </a>
-          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
-            <i class="icon icon-qzone"></i>
-          </a>
-          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
-            <i class="icon icon-facebook"></i>
-          </a>
-          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
-            <i class="icon icon-twitter"></i>
-          </a>
-          <a class="google share-sns" href="javascript:;" data-type="google">
-            <i class="icon icon-google"></i>
-          </a>
-        </div>
-      </div>
-    </span>
-  </div>
-</div>
-
-<div class="page-modal wx-share js-wx-box">
-    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
-    <p>扫一扫，分享到微信</p>
-    <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/06/21/class(类)/" alt="微信分享二维码">
-    </div>
-</div>
-
-<div class="mask js-mask"></div>
-      
-      <div class="clearfix"></div>
-    </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-  
-<nav id="article-nav">
-  
-    <a href="/2018/07/13/快捷键/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          快捷键
-        
-      </div>
-    </a>
   
   
-</nav>
-
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-  
-  
+    </div></section>
   
 
-  
-
-  
-
-  
+    
 
 
           </div>
@@ -379,8 +205,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: true,
-		isArchive: false,
+		isPost: false,
+		isArchive: true,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
