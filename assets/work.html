@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Tag: ES6 | 朱雪的博客</title>
+  <title>朱雪的博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+  <meta name="description" content="动画效果               .one {         width: 150px;         height: 150px;         position: absolute;         top: 40%;         left: 45%;         transform: translate(-50%, -50%);">
+<meta property="og:type" content="website">
 <meta property="og:title" content="朱雪的博客">
-<meta property="og:url" content="http://yoursite.com/tags/ES6/index.html">
+<meta property="og:url" content="http://yoursite.com/assets/work.html">
 <meta property="og:site_name" content="朱雪的博客">
+<meta property="og:description" content="动画效果               .one {         width: 150px;         height: 150px;         position: absolute;         top: 40%;         left: 45%;         transform: translate(-50%, -50%);">
 <meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-16T02:27:04.913Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="朱雪的博客">
+<meta name="twitter:description" content="动画效果               .one {         width: 150px;         height: 150px;         position: absolute;         top: 40%;         left: 45%;         transform: translate(-50%, -50%);">
   
     <link rel="alternative" href="/atom.xml" title="朱雪的博客" type="application/atom+xml">
   
@@ -140,68 +144,224 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="page-" class="article article-type-page " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>动画效果</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    .one {
+        width: 150px;
+        height: 150px;
+        position: absolute;
+        top: 40%;
+        left: 45%;
+        transform: translate(-50%, -50%);
+        perspective: 1000px;
+        perspective-origin: 400px -300px;
+    }
+    .two {
+        transform-style: preserve-3d;
+    }
+    .box {
+        font-size: 30px;
+        line-height: 150px;
+        text-align: center;
+        width: 150px;
+        height: 150px;
+        margin :0 auto;
+        border: 3px solid pink;
+        position: absolute;
+        
+    }
+    .two {
+        animation: haha 2s linear 8s infinite alternate;
+    }
+    .top {
+        animation: top 1s linear 1s both;
+    }
+    .bottom {
+        animation: bottom 1S linear 2s both;
+    }
+    .left {
+        animation: left 1S linear 3s both;
+    }
+    .right {
+        animation: right 1S linear 4s both;
+    }
+    .front {
+        animation: front 1S linear 5s both;
+    }
+    .back {
+        animation: back 1S linear 6s both;
+    }
+    @keyframes haha {
+        0% {
+            transform: rotate3d(0,0,0,0deg);
+        }
+        100% {
+            transform: rotate3d(1,1,1,360deg);
+        }
+    }
+    @keyframes top {
+        100% { transform: rotateX(90deg) translateZ(150px);}
+    }
+
+    @keyframes bottom {
+        100%{ transform:rotateX(-90deg) translateZ(150px);}
+    }
+    @keyframes left {
+        100% {transform: rotateY(-90deg) translateZ(150px);}
+    }
+    @keyframes right {
+        100% {transform: rotateY(90deg) translateZ(150px)}
+    }
+    @keyframes front {
+        100% {transform: translateZ(150px)}
+    }
+    @keyframes back {
+        100% { transform: rotateY(180deg) translateZ(150px)}
+    }
+    </style>
+</head>
+<body>
+    <div class="one">
+        <div class="two">
+            <div class="box top">上</div>
+            <div class="box bottom">下</div>
+            <div class="box left">左</div>
+            <div class="box right">右</div>
+            <div class="box front">前</div>
+            <div class="box back">后</div>
+        </div>
+    </div>
+</body>
+</html>
+      
+
+      
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果哦～<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2018" class="archive-year">2018</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2018/06/21/class(类)/" class="archive-article-date">
-  	<time datetime="2018-06-21T11:07:40.229Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-06-21</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2018/06/21/class(类)/">class的基本用法与继承（ES6）</a>
-    </h1>
-  
+      
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">Javascript</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">ES6</a>
-        		</li>
-      		 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">class</a>
-        		</li>
-      		
-		</ul>
-	</div>
+      
 
-          
-
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/assets/work.html" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
-  
-  
-    </div></section>
+
   
 
-    
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+  
+  
+  
+
+  
+
+  
+
+  
 
 
           </div>
@@ -226,7 +386,7 @@
 		isHome: false,
 		isPost: false,
 		isArchive: false,
-		isTag: true,
+		isTag: false,
 		isCategory: false,
 		open_in_new: false,
 		toc_hide_index: true,
