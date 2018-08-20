@@ -34,7 +34,7 @@
     <div class="bar" style="width: 0;"></div>
     <a class="icon-home image-icon" href="javascript:;"></a>
     <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">this指向</h3>
+    <h3 class="subtitle">简述对JS原型的理解</h3>
     <div class="social">
         <!--<div class="like-icon">-->
             <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
@@ -51,26 +51,27 @@
     <div class="section">
         <div class="article">
     <div class='main'>
-        <h1 class="title">this指向</h1>
+        <h1 class="title">简述对JS原型的理解</h1>
         <div class="stuff">
-            <span>八月 17, 2018</span>
+            <span>八月 20, 2018</span>
             
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/JavaScript-this/">-JavaScript -this</a></li></ul>
+  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/JavaScript-原型-原型链/">-JavaScript -原型 -原型链</a></li></ul>
 
 
         </div>
         <div class="content markdown">
             <blockquote><p>本文参考来源于 网络</p>
 </blockquote>
-<h2 id="this的指向问题"><a href="#this的指向问题" class="headerlink" title="this的指向问题"></a>this的指向问题</h2><pre><code>在函数中的this到底取何值，是在函数真正被调用执行时确定的，而不是在函数定义时确定的～
-</code></pre><h3 id="全局环境下"><a href="#全局环境下" class="headerlink" title="全局环境下"></a>全局环境下</h3><p>在全局模式下，this始终指向全局对象，即window～</p>
-<p><font color="#dd0000">注：</font>无论是否是严格模式，都指向window<table><tr><td bgcolor="#D1EEEE">console.log(this === window); // true<br>this.a = 1216;<br>console.log(window.a); // 1216<br></td></tr></table></p>
-<h3 id="作为普通函数直接调用"><a href="#作为普通函数直接调用" class="headerlink" title="作为普通函数直接调用"></a>作为普通函数直接调用</h3><p>在普通函数的内部，this也是指向全局对象(严格模式下指向undefined)～<table><tr><td bgcolor="#D1EEEE">function fn(){<br>  return this;<br>}<br>fn() === window; // true<br></td></tr></table></p>
-<h3 id="作为对象的属性调用"><a href="#作为对象的属性调用" class="headerlink" title="作为对象的属性调用"></a>作为对象的属性调用</h3><p>若函数作为对象的一个属性调用时，this指向该对象～<br>但若将对象属性赋值给一变量，再调用函数，则this指向window对象～<br>若多层嵌套的对象，内部this指向离被调用函数最近的对象～<table><tr><td bgcolor="#D1EEEE">var obj = {<br>    x:10,<br>    fn:function(){<br>        console.log(this);<br>        console.log(this.x);<br>    }<br>}<br>obj.fn();  // {x: 10, fn: ƒ}<br>          // 10<br>var fn1 = obj.fn;<br>fn1();  // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}<br>        // undefined<br></td></tr></table></p>
-<h3 id="在构造函数中调用"><a href="#在构造函数中调用" class="headerlink" title="在构造函数中调用"></a>在构造函数中调用</h3><p>在构造函数中，this指向即将被new出来的实例对象～<table><tr><td bgcolor="#D1EEEE">function Foo(){<br>    this.name = ‘pino’;<br>    console.log(this);<br>}<br>var f1 = new Foo();<br>console.log(f1.name);   // pino<br></td></tr></table></p>
-<h3 id="call-和-apply"><a href="#call-和-apply" class="headerlink" title="call 和 apply"></a>call 和 apply</h3><p>当函数通过call()和apply()方法绑定时，this指向两个方法的第一个参数对象上，若第一个参数不是对象，JS内部会尝试将其转化为对象然后再指向它～<table><tr><td bgcolor="#D1EEEE">var obj = {<br>    x:10,<br>    fn:function(){<br>        console.log(this);<br>        console.log(this.x);<br>    }<br>}<br>var fn = function(){<br>    console.log(this);<br>    console.log(this.x);<br>}<br>fn.call(obj);   // {x: 10, fn: ƒ}<br>                // 10<br></td></tr></table></p>
-<h3 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h3><p>通过bind方法绑定后，无论其在什么情况下被调用，函数将被永远绑定在其第一个参数对象上～<br>bind绑定后返回的是一个函数～<table><tr><td bgcolor="#D1EEEE">function f(){<br>  return this.a;<br>}<br>var g = f.bind({a:”啊啊啊”});<br>console.log(g()); // 啊啊啊<br>var o = {a:111, f:f, g:g};<br>console.log(o.f(), o.g()); // 111, 啊啊啊<br></td></tr></table></p>
-<h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>箭头函数不绑定this， 它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值～</p>
+<h3 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a>prototype</h3><p>prototype是函数默认的属性，每个函数都有prototype～<br>prototype的属性值是一个对象，默认的只有一个叫做constructor的属性，指向这个函数本身，但其属性值是一个对象，即属性的集合，所以不会只存在这一个函数～</p>
+<table><tr><td bgcolor="#D1EEEE">🌰：Object的prototype里面，就有好几个其他属性：<br><img src="/assets/object.jpg"><br>也可自定义添加属性:<br> function Fn() { }<br>    Fn.prototype.name = ‘pino’;<br>    Fn.prototype.getYear = function () {<br>        return 1994;<br>    };<br></td></tr></table>
+
+<h3 id="proto"><a href="#proto" class="headerlink" title="proto"></a><strong>proto</strong></h3><p>上文提到，每个函数都有一个prototype，其实还可以加一个，每个对象都有一个<strong>proto</strong>（隐式原型）～</p>
+<p><font color="#dd0000">注：</font><strong>proto</strong>属性指向创建该对象的函数的prototype，但是只有一点，请记住，Object.prototype的<strong>proto</strong>指向的是null～</p>
+<h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p>Instanceof接收两个参数，第一个变量是一个对象，暂时称为A；第二个变量一般是一个函数，暂时称为B。<br>那么，Instanceof的判断规则是：沿着A的<strong>proto</strong>这条线来找，同时沿着B的prototype这条线来找，如果两条线能找到同一个引用，即同一个对象，那么就返回true。如果找到终点还未重合，则返回false。</p>
+<h3 id="原型图-重点理解"><a href="#原型图-重点理解" class="headerlink" title="原型图(重点理解)"></a>原型图(重点理解)</h3><p>结合上面三个的说法，可看下面这个整体图进行理解：<br><img src="/assets/prototype.jpg"></p>
+<h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>javascript中的继承是通过原型链来体现的～</p>
+<table><tr><td bgcolor="#D1EEEE">🌰：function Foo () {};<br>var f1 = new Foo();<br>f1.a = 10;<br>Foo.prototype.a = 100;<br>Foo.prototype.b = 200;<br>console.log(f1.a);  //10<br>console.log(f1.b);  //200<br><br>以上代码中，f1是Foo函数new出来的对象，f1.a是f1对象的基本属性，那f1.b呢？——从Foo.prototype得来，因为f1.<strong>proto</strong>指向的是Foo.prototype<br><br>因此，访问一个对象的属性时，先在基本属性中查找，如果没有，再沿着<strong>proto</strong>这条链向上找，这就是原型链。<br></td></tr></table><br>但是有一种情况，就是想要知道这个属性是本身的属性还是继承过来的属性，这个应该怎么知道呢？—–答案是：hasOwnProperty(Object.prototype中的属性)<br><table><tr><td bgcolor="#D1EEEE">function Person(){}<br>Person.prototype.name = “allen”;<br>var person = new Person();<br>console.log(person.hasOwnProperty(“name”)); //false<br></td></tr></table>
+
 
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
