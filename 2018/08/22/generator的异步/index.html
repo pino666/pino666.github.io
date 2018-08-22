@@ -65,7 +65,11 @@
 <h3 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h3><p>ES6 诞生以前，异步编程的方法，大概有下面四种：</p>
 <table><tr><td bgcolor="#D1EEEE">1.回调函数<br>2.事件监听<br>3.发布/订阅<br>4.Promise 对象<br></td></tr></table>
 
-
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h4 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h4><p>所谓”异步”，简单说就是一个任务不是连续完成的，可以理解成该任务被人为分成两段，先执行第一段，然后转而执行其他任务，等做好了准备或者是第一段已经完成，再回过头执行第二段～<br>相应地，连续的执行就叫做同步；由于是连续执行，不能插入其他任务，所以操作系统从硬盘读取文件的这段时间，程序只能干等着～</p>
+<h4 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h4><p>回调函数，就是把任务的第二段单独写在一个函数里面，等到重新执行这个任务的时候，就直接调用这个函数～</p>
+<h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><p>之前有详细解释，请看之前的博客～</p>
+<h4 id="Generator-函数"><a href="#Generator-函数" class="headerlink" title="Generator 函数"></a>Generator 函数</h4><p>协程：多个线程互相协作，完成异步任务～</p>
+<table><tr><td bgcolor="#D1EEEE">运行流程如下：<br>第一步，协程A开始执行～<br>第二步，协程A执行到一半，进入暂停，执行权转移到协程B～<br>第三步，（一段时间后）协程B交还执行权～<br>第四步，协程A恢复执行～<br>上面流程的协程A，就是异步任务，因为它分成两段（或多段）执行～<br></td></tr></table>那么协程的 Generator 函数是如何实现的？<br>Generator 函数是协程在 ES6 的实现，最大特点就是可以交出函数的执行权（即暂停执行）～<br>整个 Generator 函数就是一个封装的异步任务，或者说是异步任务的容器。异步操作需要暂停的地方，都用yield语句注明～<br><table><tr><td bgcolor="#D1EEEE">function* gen(x) {<br>  var y = yield x + 2;<br>  return y;<br>}<br>var g = gen(1);<br>g.next() // { value: 3, done: false }<br>g.next() // { value: undefined, done: true }<br>解释：<br>上面代码中，调用 Generator 函数，会返回一个内部指针（即遍历器）g。这是 Generator 函数不同于普通函数的另一个地方，即执行它不会返回结果，返回的是指针对象。调用指针g的next方法，会移动内部指针（即执行异步任务的第一段），指向第一个遇到的yield语句，上例是执行到x + 2为止<br></td></tr></table>Generator 函数可以暂停执行和恢复执行，这是它能封装异步任务的根本原因。除此之外，它还有两个特性，使它可以作为异步编程的完整解决方案：函数体内外的数据交换和错误处理机制～<table><tr><td bgcolor="#D1EEEE"><br>next返回值的 value 属性，是 Generator 函数向外输出数据；next方法还可以接受参数，向 Generator 函数体内输入数据～</td></tr></table><br>Generator 函数内部还可以部署错误处理代码，捕获函数体外抛出的错误～<table><tr><td bgcolor="#D1EEEE">function* gen(x){<br>  try {<br>    var y = yield x + 2;<br>  } catch (e){<br>    console.log(e);<br>  }<br>  return y;<br>}<br>var g = gen(1);<br>g.next();<br>g.throw(‘出错了’);<br>// 出错了<br>上面代码的最后一行，Generator 函数体外，使用指针对象的throw方法抛出的错误，可以被函数体内的try…catch代码块捕获~<br>这意味着，出错的代码与处理错误的代码，实现了时间和空间上的分离，这对于异步编程无疑是很重要的~<br></td></tr></table>
             <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
             <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
                 <source type="audio/mpeg" src="">
@@ -91,7 +95,7 @@
     </div>
     
         <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#传统方法"><span class="toc-number">1.</span> <span class="toc-text">传统方法</span></a></li></ol>
+            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#传统方法"><span class="toc-number">1.</span> <span class="toc-text">传统方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-number">2.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#异步"><span class="toc-number">2.1.</span> <span class="toc-text">异步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回调函数"><span class="toc-number">2.2.</span> <span class="toc-text">回调函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Promise"><span class="toc-number">2.3.</span> <span class="toc-text">Promise</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Generator-函数"><span class="toc-number">2.4.</span> <span class="toc-text">Generator 函数</span></a></li></ol></li></ol>
         </div>
     
 </div>
