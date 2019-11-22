@@ -1,195 +1,280 @@
-
 <!DOCTYPE html>
-<html lang="" class="loading">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>pino</title>
-
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="google" content="notranslate" />
-    <meta name="keywords" content="Fechin,"> 
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="本文参考来源于 网络  2D 转换translate() 方法:根据给定的left(x 坐标)和top(y 坐标)位置参数,元素从其当前位置移动(相对窗口左上角)   例： translate(50px,100px) :把元素从左侧移动 50 像素，从顶端移动 100 像素  rotate() 方法:元素顺时针旋转给定的角度允许负值，元素将逆时针旋转   例：rotate(30deg) :把元素顺">
+<meta name="keywords" content="css,css3,动画">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3 2D&#x2F;3D总结">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;07&#x2F;16&#x2F;css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93&#x2F;index.html">
+<meta property="og:site_name" content="pino">
+<meta property="og:description" content="本文参考来源于 网络  2D 转换translate() 方法:根据给定的left(x 坐标)和top(y 坐标)位置参数,元素从其当前位置移动(相对窗口左上角)   例： translate(50px,100px) :把元素从左侧移动 50 像素，从顶端移动 100 像素  rotate() 方法:元素顺时针旋转给定的角度允许负值，元素将逆时针旋转   例：rotate(30deg) :把元素顺">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-07-27T04:26:13.542Z">
+<meta name="twitter:card" content="summary">
     
-    <meta name="author" content="Zhu Xue"> 
-    <link rel="alternative" href="atom.xml" title="pino" type="application/atom+xml"> 
-    <link rel="icon" href="/assets/img.png"> 
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <link rel="stylesheet" href="/css/diaspora.css">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-8691406134231910",
-        enable_page_level_ads: true
-      });
-    </script>
-
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>CSS3 2D/3D总结</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
 </head>
 
-<body class="loading">
-    <div id="loader"></div>
-    <div id="single">
-    <div id="top" style="display: block;">
-    <div class="bar" style="width: 0;"></div>
-    <a class="icon-home image-icon" href="javascript:;"></a>
-    <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">CSS3 2D/3D总结</h3>
-    <div class="social">
-        <!--<div class="like-icon">-->
-            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
-        <!--</div>-->
-        <div>
-            <div class="share">
-                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
-            </div>
-            <div id="qr"></div>
-        </div>
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/07/18/sass%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/06/21/class(%E7%B1%BB)/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&text=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&title=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&is_video=false&description=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSS3 2D/3D总结&body=Check out this article: http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&title=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&title=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&title=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&title=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&name=CSS3 2D/3D总结&description=" target="_blank" rel="noopener"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
     </div>
-    <div class="scrollbar"></div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2D-转换"><span class="toc-number">1.</span> <span class="toc-text">2D 转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3D-转换"><span class="toc-number">2.</span> <span class="toc-text">3D 转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2D-3D-方法"><span class="toc-number">3.</span> <span class="toc-text">2D/3D 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过渡"><span class="toc-number">4.</span> <span class="toc-text">过渡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动画"><span class="toc-number">5.</span> <span class="toc-text">动画</span></a></li></ol>
+    </div>
+  </span>
 </div>
-    <div class="section">
-        <div class="article">
-    <div class='main'>
-        <h1 class="title">CSS3 2D/3D总结</h1>
-        <div class="stuff">
-            <span>七月 16, 2018</span>
-            
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/css/">css</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/css3/">css3</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/动画/">动画</a></li></ul>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CSS3 2D/3D总结
+    </h1>
 
 
-        </div>
-        <div class="content markdown">
-            <blockquote><p>本文参考来源于 网络</p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">pino</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-07-16T05:10:41.000Z" itemprop="datePublished">2018-07-16</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/css/" rel="tag">css</a>, <a class="tag-link" href="/tags/css3/" rel="tag">css3</a>, <a class="tag-link" href="/tags/%E5%8A%A8%E7%94%BB/" rel="tag">动画</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote><p>本文参考来源于 网络</p>
 </blockquote>
 <h2 id="2D-转换"><a href="#2D-转换" class="headerlink" title="2D 转换"></a>2D 转换</h2><p>translate() 方法:根据给定的left(x 坐标)和top(y 坐标)位置参数,元素从其当前位置移动(相对窗口左上角)</p>
-<table><tr><td bgcolor="#D1EEEE">  例： translate(50px,100px) :把元素从左侧移动 50 像素，从顶端移动 100 像素</td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>  例： translate(50px,100px) :把元素从左侧移动 50 像素，从顶端移动 100 像素</td></tr></table>
 
 <p>rotate() 方法:元素顺时针旋转给定的角度允许负值，元素将逆时针旋转</p>
-<table><tr><td bgcolor="#D1EEEE">  例：rotate(30deg) :把元素顺时针旋转 30 度</td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>  例：rotate(30deg) :把元素顺时针旋转 30 度</td></tr></table>
 
 <p>scale() 方法:根据给定的宽度(X 轴)和高度(Y 轴)参数,元素的尺寸会增加或减少</p>
-<table><tr><td bgcolor="#D1EEEE">  例；scale(2,4) :把宽度转换为原始尺寸的 2 倍，把高度转换为原始高度的 4 倍</td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>  例；scale(2,4) :把宽度转换为原始尺寸的 2 倍，把高度转换为原始高度的 4 倍</td></tr></table>
 
 <p>skew() 方法:根据给定的水平线(X 轴)和垂直线(Y 轴)参数，元素翻转给定的角度</p>
-<table><tr><td bgcolor="#D1EEEE">  例：skew(30deg,20deg) :围绕 X 轴把元素翻转 30 度，围绕 Y 轴翻转 20 度</td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>  例：skew(30deg,20deg) :围绕 X 轴把元素翻转 30 度，围绕 Y 轴翻转 20 度</td></tr></table>
 
 <p>matrix() 方法:把所有 2D 转换方法组合在一起<br>matrix() 方法需要六个参数，包含数学函数，允许您：旋转、缩放、移动以及倾斜元素</p>
 <h2 id="3D-转换"><a href="#3D-转换" class="headerlink" title="3D 转换"></a>3D 转换</h2><p>rotateX() 方法:元素围绕其 X 轴以给定的度数进行旋转<br>rotateY() 旋转:元素围绕其 Y 轴以给定的度数进行旋转<br>transform-style:属性规定如何在 3D 空间中呈现被嵌套的元素<br>注释：该属性必须与 transform 属性一同使用</p>
-<table><tr><td bgcolor="#D1EEEE">  例：transform-style: flat|preserve-3d;  //flat:子元素将不保留其3D位置;preserve-3d:子元素将保留其3D位置</td></tr></table>perspective属性：定义3D元素距视图的距离，以像素计，该属性允许您改变 3D 元素查看 3D 元素的视图<br>注释：perspective 属性只影响 3D 转换元素<br>当为元素定义 perspective 属性时，其子元素会获得透视效果，而不是元素本身<br>提示：请与 perspective-origin 属性一同使用该属性，这样您就能够改变 3D 元素的底部位置<br><table><tr><td bgcolor="#D1EEEE">  例：perspective: number|none;   //number:元素距离视图的距离，以像素计;none:默认值与 0 相同,不设置透视<br>perspective-origin属性：定义3D元素所基于的 X 轴和 Y 轴，该属性允许您改变 3D 元素的底部位置<br>注释：该属性必须与 perspective 属性一同使用，而且只影响 3D 转换元素<br>当为元素定义 perspective-origin 属性时，其子元素会获得透视效果，而不是元素本身<br>例：perspective-origin: x-axis y-axis;<br>    //x-axis:定义该视图在 x 轴上的位置默认值：50%,可能的值：left,center,right,length,%<br>    //y-axis:定义该视图在 y 轴上的位置默认值：50%,可能的值：top,center,bottom,length,%<br>backface-visibility属性:定义当元素不面向屏幕时是否可见<br>如果在旋转元素不希望看到其背面时，该属性很有用<br>例：backface-visibility: visible|hidden;    //visible:背面是可见的,hidden:背面是不可见的</td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>  例：transform-style: flat|preserve-3d;  //flat:子元素将不保留其3D位置;preserve-3d:子元素将保留其3D位置</td></tr></table>perspective属性：定义3D元素距视图的距离，以像素计，该属性允许您改变 3D 元素查看 3D 元素的视图<br>注释：perspective 属性只影响 3D 转换元素<br>当为元素定义 perspective 属性时，其子元素会获得透视效果，而不是元素本身<br>提示：请与 perspective-origin 属性一同使用该属性，这样您就能够改变 3D 元素的底部位置<br><table><tr><td bgcolor=#D1EEEE>  例：perspective: number|none;   //number:元素距离视图的距离，以像素计;none:默认值与 0 相同,不设置透视<br>perspective-origin属性：定义3D元素所基于的 X 轴和 Y 轴，该属性允许您改变 3D 元素的底部位置<br>注释：该属性必须与 perspective 属性一同使用，而且只影响 3D 转换元素<br>当为元素定义 perspective-origin 属性时，其子元素会获得透视效果，而不是元素本身<br>例：perspective-origin: x-axis y-axis;<br>    //x-axis:定义该视图在 x 轴上的位置默认值：50%,可能的值：left,center,right,length,%<br>    //y-axis:定义该视图在 y 轴上的位置默认值：50%,可能的值：top,center,bottom,length,%<br>backface-visibility属性:定义当元素不面向屏幕时是否可见<br>如果在旋转元素不希望看到其背面时，该属性很有用<br>例：backface-visibility: visible|hidden;    //visible:背面是可见的,hidden:背面是不可见的</td></tr></table>
 
 <h2 id="2D-3D-方法"><a href="#2D-3D-方法" class="headerlink" title="2D/3D 方法"></a>2D/3D 方法</h2><p>transform属性：向元素应用 2D 或 3D 转换，该属性允许我们对元素进行旋转、缩放、移动或倾斜</p>
-<table><tr><td bgcolor="#D1EEEE">   例：transform: none|transform-functions;<br>        //none：定义不进行转换<br>        //matrix(n,n,n,n,n,n)：定义 2D 转换，使用六个值的矩阵<br>        //matrix3d(n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n)：定义 3D 转换，使用 16 个值的 4x4 矩阵<br>        //translate(x,y)：定义 2D 转换<br>        //translate3d(x,y,z)：定义 3D 转换<br>        //translateX(x)：定义转换，只是用 X 轴的值<br>        //translateY(y)：定义转换，只是用 Y 轴的值<br>        //translateZ(z)：定义 3D 转换，只是用 Z 轴的值<br>        //scale(x,y)：定义 2D 缩放转换<br>        //scale3d(x,y,z)：定义 3D 缩放转换<br>        //scaleX(x)：通过设置 X 轴的值来定义缩放转换<br>        //scaleY(y)：通过设置 Y 轴的值来定义缩放转换<br>        //scaleZ(z)：通过设置 Z 轴的值来定义 3D 缩放转换<br>        //rotate(angle)：定义 2D 旋转，在参数中规定角度<br>        //rotate3d(x,y,z,angle)：定义 3D 旋转<br>        //rotateX(angle)：定义沿着 X 轴的 3D 旋转<br>        //rotateY(angle)：定义沿着 Y 轴的 3D 旋转<br>        //rotateZ(angle)：定义沿着 Z 轴的 3D 旋转<br>        //skew(x-angle,y-angle)：定义沿着 X 和 Y 轴的 2D 倾斜转换<br>        //skewX(angle)：定义沿着 X 轴的 2D 倾斜转换<br>        //skewY(angle)：定义沿着 Y 轴的 2D 倾斜转换<br>        //perspective(n)：为 3D 转换元素定义透视视图<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>   例：transform: none|transform-functions;<br>        //none：定义不进行转换<br>        //matrix(n,n,n,n,n,n)：定义 2D 转换，使用六个值的矩阵<br>        //matrix3d(n,n,n,n,n,n,n,n,n,n,n,n,n,n,n,n)：定义 3D 转换，使用 16 个值的 4x4 矩阵<br>        //translate(x,y)：定义 2D 转换<br>        //translate3d(x,y,z)：定义 3D 转换<br>        //translateX(x)：定义转换，只是用 X 轴的值<br>        //translateY(y)：定义转换，只是用 Y 轴的值<br>        //translateZ(z)：定义 3D 转换，只是用 Z 轴的值<br>        //scale(x,y)：定义 2D 缩放转换<br>        //scale3d(x,y,z)：定义 3D 缩放转换<br>        //scaleX(x)：通过设置 X 轴的值来定义缩放转换<br>        //scaleY(y)：通过设置 Y 轴的值来定义缩放转换<br>        //scaleZ(z)：通过设置 Z 轴的值来定义 3D 缩放转换<br>        //rotate(angle)：定义 2D 旋转，在参数中规定角度<br>        //rotate3d(x,y,z,angle)：定义 3D 旋转<br>        //rotateX(angle)：定义沿着 X 轴的 3D 旋转<br>        //rotateY(angle)：定义沿着 Y 轴的 3D 旋转<br>        //rotateZ(angle)：定义沿着 Z 轴的 3D 旋转<br>        //skew(x-angle,y-angle)：定义沿着 X 和 Y 轴的 2D 倾斜转换<br>        //skewX(angle)：定义沿着 X 轴的 2D 倾斜转换<br>        //skewY(angle)：定义沿着 Y 轴的 2D 倾斜转换<br>        //perspective(n)：为 3D 转换元素定义透视视图<br></td></tr></table>
 
 <p>transform-origin属性：允许您改变被转换元素的位置<br>2D 转换元素能够改变元素 x 和 y 轴，3D 转换元素还能改变其 Z 轴</p>
-<table><tr><td bgcolor="#D1EEEE"><br>transform-origin: x-axis y-axis z-axis;<br>    //x-axis：定义视图被置于 X 轴的何处可能的值：left，center，right，length，%<br>    //y-axis：定义视图被置于 Y 轴的何处可能的值：top，center，bottom，length，%<br>    //z-axis：    定义视图被置于 Z 轴的何处可能的值：length<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE><br>transform-origin: x-axis y-axis z-axis;<br>    //x-axis：定义视图被置于 X 轴的何处可能的值：left，center，right，length，%<br>    //y-axis：定义视图被置于 Y 轴的何处可能的值：top，center，bottom，length，%<br>    //z-axis：    定义视图被置于 Z 轴的何处可能的值：length<br></td></tr></table>
 
 <h2 id="过渡"><a href="#过渡" class="headerlink" title="过渡"></a>过渡</h2><p>transition属性：(过渡效果通常在用户将鼠标指针浮动到元素上时发生)</p>
-<table><tr><td bgcolor="#D1EEEE"><br>transition：简写属性，用于在一个属性中设置四个过渡属性<br>transition-property：规定应用过渡的 CSS 属性的名称<br>transition-duration：定义过渡效果花费的时间，默认是 0<br>transition-timing-function：规定过渡效果的时间曲线，默认是 “ease”<br>transition-delay：规定过渡效果何时开始，默认是 0<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE><br>transition：简写属性，用于在一个属性中设置四个过渡属性<br>transition-property：规定应用过渡的 CSS 属性的名称<br>transition-duration：定义过渡效果花费的时间，默认是 0<br>transition-timing-function：规定过渡效果的时间曲线，默认是 “ease”<br>transition-delay：规定过渡效果何时开始，默认是 0<br></td></tr></table>
 
 <h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><p>@keyframes规则：用于创建动画，在 @keyframes 中规定某项CSS样式，就能创建由当前样式逐渐改为新样式的动画效果</p>
-<table><tr><td bgcolor="#D1EEEE"> 例：@keyframes myfirst (还可以用百分比，例：0%，10%，100%)<br>{<br>from {background: red;}<br>to {background: yellow;}<br>}<br>当您在 @keyframes 中创建动画时，请把它捆绑到某个选择器，否则不会产生动画效果<br>通过规定至少以下两项 CSS3 动画属性，即可将动画绑定到选择器：规定动画的名称，规定动画的时长<br>例：把 “myfirst” 动画捆绑到 div 元素，时长：5 秒：<br>div<br>{<br>animation: myfirst 5s; } //缺少其一，动画无效果</td></tr></table>
+<table><tr><td bgcolor=#D1EEEE> 例：@keyframes myfirst (还可以用百分比，例：0%，10%，100%)<br>{<br>from {background: red;}<br>to {background: yellow;}<br>}<br>当您在 @keyframes 中创建动画时，请把它捆绑到某个选择器，否则不会产生动画效果<br>通过规定至少以下两项 CSS3 动画属性，即可将动画绑定到选择器：规定动画的名称，规定动画的时长<br>例：把 “myfirst” 动画捆绑到 div 元素，时长：5 秒：<br>div<br>{<br>animation: myfirst 5s; } //缺少其一，动画无效果</td></tr></table>
 
 <p>animation 属性:是一个简写属性，用于设置六个动画属性,除了 animation-play-state 属性</p>
-<table><tr><td bgcolor="#D1EEEE"><br>animation: name duration timing-function delay iteration-count direction;<br>animation-name:规定需要绑定到选择器的 keyframe 名称<br>animation-duration:规定完成动画所花费的时间，以秒或毫秒计.默认是 0<br>animation-timing-function:规定动画的速度曲线,默认是 “ease”<br>animation-delay:规定在动画开始之前的延迟,默认是 0<br>animation-iteration-count:规定动画应该播放的次数,默认是 1<br>animation-direction:规定是否应该轮流反向播放动画,默认是 “normal”<br><br>animation-play-state:规定动画是否正在运行或暂停,默认是 “running”<br>animation-fill-mode:规定对象动画时间之外的状态<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE><br>animation: name duration timing-function delay iteration-count direction;<br>animation-name:规定需要绑定到选择器的 keyframe 名称<br>animation-duration:规定完成动画所花费的时间，以秒或毫秒计.默认是 0<br>animation-timing-function:规定动画的速度曲线,默认是 “ease”<br>animation-delay:规定在动画开始之前的延迟,默认是 0<br>animation-iteration-count:规定动画应该播放的次数,默认是 1<br>animation-direction:规定是否应该轮流反向播放动画,默认是 “normal”<br><br>animation-play-state:规定动画是否正在运行或暂停,默认是 “running”<br>animation-fill-mode:规定对象动画时间之外的状态<br></td></tr></table>
 
 
 
 
 
 
-            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
-            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
-                <source type="audio/mpeg" src="">
-            </audio>
-            
-                <ul id="audio-list" style="display:none">
-                    
-                </ul>
-            
-        </div>
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
         
-    <div id='gitalk-container' class="comment link"
-        data-ae='false'
-        data-ci=''
-        data-cs=''
-        data-r=''
-        data-o=''
-        data-a=''
-        data-d='false'
-    >查看评论</div>
+      </ul>
+    </div>
 
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2D-转换"><span class="toc-number">1.</span> <span class="toc-text">2D 转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3D-转换"><span class="toc-number">2.</span> <span class="toc-text">3D 转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2D-3D-方法"><span class="toc-number">3.</span> <span class="toc-text">2D/3D 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过渡"><span class="toc-number">4.</span> <span class="toc-text">过渡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动画"><span class="toc-number">5.</span> <span class="toc-text">动画</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/" target="_blank" rel="noopener"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&text=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&title=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&is_video=false&description=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CSS3 2D/3D总结&body=Check out this article: http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&title=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&title=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&title=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&title=CSS3 2D/3D总结" target="_blank" rel="noopener"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/&name=CSS3 2D/3D总结&description=" target="_blank" rel="noopener"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
     </div>
-    
-        <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#2D-转换"><span class="toc-number">1.</span> <span class="toc-text">2D 转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3D-转换"><span class="toc-number">2.</span> <span class="toc-text">3D 转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2D-3D-方法"><span class="toc-number">3.</span> <span class="toc-text">2D/3D 方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#过渡"><span class="toc-number">4.</span> <span class="toc-text">过渡</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#动画"><span class="toc-number">5.</span> <span class="toc-text">动画</span></a></li></ol>
-        </div>
-    
-</div>
 
-
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
     </div>
+
+  </div>
 </div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 Zhu Xue
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
 </body>
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
-<script src="/js/plugin.js"></script>
-<script src="/js/diaspora.js"></script>
-<link rel="stylesheet" href="/photoswipe/photoswipe.css">
-<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
-<script src="/photoswipe/photoswipe.min.js"></script>
-<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-                <!--  Controls are self-explanatory. Order can be changed. -->
-                <div class="pswp__counter"></div>
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
 </html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

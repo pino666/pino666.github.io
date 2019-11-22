@@ -1,170 +1,258 @@
-
 <!DOCTYPE html>
-<html lang="" class="loading">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>pino</title>
-
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="google" content="notranslate" />
-    <meta name="keywords" content="Fechin,"> 
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="本文参考来源于 网络  prototypeprototype是函数默认的属性，每个函数都有prototype～prototype的属性值是一个对象，默认的只有一个叫做constructor的属性，指向这个函数本身，但其属性值是一个对象，即属性的集合，所以不会只存在这一个函数～ 🌰：Object的prototype里面，就有好几个其他属性：也可自定义添加属性: function Fn() { }">
+<meta name="keywords" content="-JavaScript -原型 -原型链">
+<meta property="og:type" content="article">
+<meta property="og:title" content="简述对JS原型的理解">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;20&#x2F;JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3&#x2F;index.html">
+<meta property="og:site_name" content="pino">
+<meta property="og:description" content="本文参考来源于 网络  prototypeprototype是函数默认的属性，每个函数都有prototype～prototype的属性值是一个对象，默认的只有一个叫做constructor的属性，指向这个函数本身，但其属性值是一个对象，即属性的集合，所以不会只存在这一个函数～ 🌰：Object的prototype里面，就有好几个其他属性：也可自定义添加属性: function Fn() { }">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;assets&#x2F;object.jpg">
+<meta property="og:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;assets&#x2F;prototype.jpg">
+<meta property="og:updated_time" content="2018-08-22T03:12:49.526Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;yoursite.com&#x2F;assets&#x2F;object.jpg">
     
-    <meta name="author" content="Zhu Xue"> 
-    <link rel="alternative" href="atom.xml" title="pino" type="application/atom+xml"> 
-    <link rel="icon" href="/assets/img.png"> 
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <link rel="stylesheet" href="/css/diaspora.css">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-8691406134231910",
-        enable_page_level_ads: true
-      });
-    </script>
-
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>简述对JS原型的理解</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
 </head>
 
-<body class="loading">
-    <div id="loader"></div>
-    <div id="single">
-    <div id="top" style="display: block;">
-    <div class="bar" style="width: 0;"></div>
-    <a class="icon-home image-icon" href="javascript:;"></a>
-    <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">简述对JS原型的理解</h3>
-    <div class="social">
-        <!--<div class="like-icon">-->
-            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
-        <!--</div>-->
-        <div>
-            <div class="share">
-                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
-            </div>
-            <div id="qr"></div>
-        </div>
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/08/21/generator%E7%9A%84%E5%AD%A6%E4%B9%A0/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/08/17/this%E6%8C%87%E5%90%91/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/" target="_blank" rel="noopener"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&text=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&title=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&is_video=false&description=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=简述对JS原型的理解&body=Check out this article: http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&title=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&title=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&title=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&title=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&name=简述对JS原型的理解&description=" target="_blank" rel="noopener"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
     </div>
-    <div class="scrollbar"></div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#prototype"><span class="toc-number">1.</span> <span class="toc-text">prototype</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proto"><span class="toc-number">2.</span> <span class="toc-text">proto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof"><span class="toc-number">3.</span> <span class="toc-text">instanceof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型图-重点理解"><span class="toc-number">4.</span> <span class="toc-text">原型图(重点理解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承"><span class="toc-number">5.</span> <span class="toc-text">继承</span></a></li></ol>
+    </div>
+  </span>
 </div>
-    <div class="section">
-        <div class="article">
-    <div class='main'>
-        <h1 class="title">简述对JS原型的理解</h1>
-        <div class="stuff">
-            <span>八月 20, 2018</span>
-            
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/JavaScript-原型-原型链/">-JavaScript -原型 -原型链</a></li></ul>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        简述对JS原型的理解
+    </h1>
 
 
-        </div>
-        <div class="content markdown">
-            <blockquote><p>本文参考来源于 网络</p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">pino</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-08-20T08:36:41.000Z" itemprop="datePublished">2018-08-20</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JavaScript-%E5%8E%9F%E5%9E%8B-%E5%8E%9F%E5%9E%8B%E9%93%BE/" rel="tag">-JavaScript -原型 -原型链</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote><p>本文参考来源于 网络</p>
 </blockquote>
 <h3 id="prototype"><a href="#prototype" class="headerlink" title="prototype"></a>prototype</h3><p>prototype是函数默认的属性，每个函数都有prototype～<br>prototype的属性值是一个对象，默认的只有一个叫做constructor的属性，指向这个函数本身，但其属性值是一个对象，即属性的集合，所以不会只存在这一个函数～</p>
-<table><tr><td bgcolor="#D1EEEE">🌰：Object的prototype里面，就有好几个其他属性：<br><img src="/assets/object.jpg"><br>也可自定义添加属性:<br> function Fn() { }<br>    Fn.prototype.name = ‘pino’;<br>    Fn.prototype.getYear = function () {<br>        return 1994;<br>    };<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>🌰：Object的prototype里面，就有好几个其他属性：<br><img src="/assets/object.jpg"/><br>也可自定义添加属性:<br> function Fn() { }<br>    Fn.prototype.name = ‘pino’;<br>    Fn.prototype.getYear = function () {<br>        return 1994;<br>    };<br></td></tr></table>
 
 <h3 id="proto"><a href="#proto" class="headerlink" title="proto"></a><strong>proto</strong></h3><p>上文提到，每个函数都有一个prototype，其实还可以加一个，每个对象都有一个<strong>proto</strong>（隐式原型）～</p>
 <p><font color="#dd0000">注：</font><strong>proto</strong>属性指向创建该对象的函数的prototype，但是只有一点，请记住，Object.prototype的<strong>proto</strong>指向的是null～</p>
 <h3 id="instanceof"><a href="#instanceof" class="headerlink" title="instanceof"></a>instanceof</h3><p>Instanceof接收两个参数，第一个变量是一个对象，暂时称为A；第二个变量一般是一个函数，暂时称为B。<br>那么，Instanceof的判断规则是：沿着A的<strong>proto</strong>这条线来找，同时沿着B的prototype这条线来找，如果两条线能找到同一个引用，即同一个对象，那么就返回true。如果找到终点还未重合，则返回false。</p>
-<h3 id="原型图-重点理解"><a href="#原型图-重点理解" class="headerlink" title="原型图(重点理解)"></a>原型图(重点理解)</h3><p>结合上面三个的说法，可看下面这个整体图进行理解：<br><img src="/assets/prototype.jpg"></p>
+<h3 id="原型图-重点理解"><a href="#原型图-重点理解" class="headerlink" title="原型图(重点理解)"></a>原型图(重点理解)</h3><p>结合上面三个的说法，可看下面这个整体图进行理解：<br><img src="/assets/prototype.jpg"/></p>
 <h3 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h3><p>javascript中的继承是通过原型链来体现的～</p>
-<table><tr><td bgcolor="#D1EEEE">🌰：function Foo () {};<br>var f1 = new Foo();<br>f1.a = 10;<br>Foo.prototype.a = 100;<br>Foo.prototype.b = 200;<br>console.log(f1.a);  //10<br>console.log(f1.b);  //200<br><br>以上代码中，f1是Foo函数new出来的对象，f1.a是f1对象的基本属性，那f1.b呢？——从Foo.prototype得来，因为f1.<strong>proto</strong>指向的是Foo.prototype<br><br>因此，访问一个对象的属性时，先在基本属性中查找，如果没有，再沿着<strong>proto</strong>这条链向上找，这就是原型链。<br></td></tr></table><br>但是有一种情况，就是想要知道这个属性是本身的属性还是继承过来的属性，这个应该怎么知道呢？—–答案是：hasOwnProperty(Object.prototype中的属性)<br><table><tr><td bgcolor="#D1EEEE">function Person(){}<br>Person.prototype.name = “allen”;<br>var person = new Person();<br>console.log(person.hasOwnProperty(“name”)); //false<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>🌰：function Foo () {};<br>var f1 = new Foo();<br>f1.a = 10;<br>Foo.prototype.a = 100;<br>Foo.prototype.b = 200;<br>console.log(f1.a);  //10<br>console.log(f1.b);  //200<br><br>以上代码中，f1是Foo函数new出来的对象，f1.a是f1对象的基本属性，那f1.b呢？——从Foo.prototype得来，因为f1.<strong>proto</strong>指向的是Foo.prototype<br><br>因此，访问一个对象的属性时，先在基本属性中查找，如果没有，再沿着<strong>proto</strong>这条链向上找，这就是原型链。<br></td></tr></table><br>但是有一种情况，就是想要知道这个属性是本身的属性还是继承过来的属性，这个应该怎么知道呢？—–答案是：hasOwnProperty(Object.prototype中的属性)<br><table><tr><td bgcolor=#D1EEEE>function Person(){}<br>Person.prototype.name = “allen”;<br>var person = new Person();<br>console.log(person.hasOwnProperty(“name”)); //false<br></td></tr></table>
 
 
-            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
-            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
-                <source type="audio/mpeg" src="">
-            </audio>
-            
-                <ul id="audio-list" style="display:none">
-                    
-                </ul>
-            
-        </div>
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
         
-    <div id='gitalk-container' class="comment link"
-        data-ae='false'
-        data-ci=''
-        data-cs=''
-        data-r=''
-        data-o=''
-        data-a=''
-        data-d='false'
-    >查看评论</div>
+      </ul>
+    </div>
 
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#prototype"><span class="toc-number">1.</span> <span class="toc-text">prototype</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proto"><span class="toc-number">2.</span> <span class="toc-text">proto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof"><span class="toc-number">3.</span> <span class="toc-text">instanceof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型图-重点理解"><span class="toc-number">4.</span> <span class="toc-text">原型图(重点理解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承"><span class="toc-number">5.</span> <span class="toc-text">继承</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/" target="_blank" rel="noopener"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&text=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&title=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&is_video=false&description=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=简述对JS原型的理解&body=Check out this article: http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&title=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&title=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&title=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&title=简述对JS原型的理解" target="_blank" rel="noopener"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/&name=简述对JS原型的理解&description=" target="_blank" rel="noopener"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
     </div>
-    
-        <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#prototype"><span class="toc-number">1.</span> <span class="toc-text">prototype</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#proto"><span class="toc-number">2.</span> <span class="toc-text">proto</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#instanceof"><span class="toc-number">3.</span> <span class="toc-text">instanceof</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原型图-重点理解"><span class="toc-number">4.</span> <span class="toc-text">原型图(重点理解)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#继承"><span class="toc-number">5.</span> <span class="toc-text">继承</span></a></li></ol>
-        </div>
-    
-</div>
 
-
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
     </div>
+
+  </div>
 </div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 Zhu Xue
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
 </body>
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
-<script src="/js/plugin.js"></script>
-<script src="/js/diaspora.js"></script>
-<link rel="stylesheet" href="/photoswipe/photoswipe.css">
-<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
-<script src="/photoswipe/photoswipe.min.js"></script>
-<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-                <!--  Controls are self-explanatory. Order can be changed. -->
-                <div class="pswp__counter"></div>
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
 </html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

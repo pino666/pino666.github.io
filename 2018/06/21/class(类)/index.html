@@ -1,74 +1,151 @@
-
 <!DOCTYPE html>
-<html lang="" class="loading">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>pino</title>
-
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="google" content="notranslate" />
-    <meta name="keywords" content="Fechin,"> 
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="本文参考于ECMAScript 6 入门–阮一峰 http:&#x2F;&#x2F;es6.ruanyifeng.com&#x2F;#docs&#x2F;class  class的基本用法在JS语言中，生成实力对象的传统方法是通过构造函数。而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。    例： &#x2F;&#x2F;定">
+<meta name="keywords" content="Javascript,ES6,class">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6 - class的基本用法与继承">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;06&#x2F;21&#x2F;class(%E7%B1%BB)&#x2F;index.html">
+<meta property="og:site_name" content="pino">
+<meta property="og:description" content="本文参考于ECMAScript 6 入门–阮一峰 http:&#x2F;&#x2F;es6.ruanyifeng.com&#x2F;#docs&#x2F;class  class的基本用法在JS语言中，生成实力对象的传统方法是通过构造函数。而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。    例： &#x2F;&#x2F;定">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-07T04:47:40.401Z">
+<meta name="twitter:card" content="summary">
     
-    <meta name="author" content="Zhu Xue"> 
-    <link rel="alternative" href="atom.xml" title="pino" type="application/atom+xml"> 
-    <link rel="icon" href="/assets/img.png"> 
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <link rel="stylesheet" href="/css/diaspora.css">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-8691406134231910",
-        enable_page_level_ads: true
-      });
-    </script>
-
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>ES6 - class的基本用法与继承</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
 </head>
 
-<body class="loading">
-    <div id="loader"></div>
-    <div id="single">
-    <div id="top" style="display: block;">
-    <div class="bar" style="width: 0;"></div>
-    <a class="icon-home image-icon" href="javascript:;"></a>
-    <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">ES6 - class的基本用法与继承</h3>
-    <div class="social">
-        <!--<div class="like-icon">-->
-            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
-        <!--</div>-->
-        <div>
-            <div class="share">
-                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
-            </div>
-            <div id="qr"></div>
-        </div>
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/07/16/css3%E5%8A%A8%E7%94%BB%E6%80%BB%E7%BB%93/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/" target="_blank" rel="noopener"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&text=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&title=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&is_video=false&description=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ES6 - class的基本用法与继承&body=Check out this article: http://yoursite.com/2018/06/21/class(%E7%B1%BB)/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&title=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&title=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&title=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&title=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&name=ES6 - class的基本用法与继承&description=&lt;blockquote&gt;&lt;p&gt;本文参考于ECMAScript 6 入门–阮一峰 &lt;a href=&#34;http://es6.ruanyifeng.com/#docs/class&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://es6.ruanyifeng.com/#docs/class&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;class的基本用法&#34;&gt;&lt;a href=&#34;#class的基本用法&#34; class=&#34;headerlink&#34; title=&#34;class的基本用法&#34;&gt;&lt;/a&gt;class的基本用法&lt;/h2&gt;&lt;p&gt;在JS语言中，生成实力对象的传统方法是通过构造函数。&lt;br&gt;而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。&lt;br&gt;实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。&lt;/p&gt;
+&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=#D1EEEE&gt;   例： //定义类&lt;br&gt;    class Point {&lt;br&gt;        constructor(x, y) {&lt;br&gt;            this.x = x;&lt;br&gt;            this.y = y;&lt;br&gt;        }&lt;br&gt;&lt;br&gt;        toString() {&lt;br&gt;            return ‘(‘ + this.x + ‘,’ + this.y + ‘)’;&lt;br&gt;        }&lt;br&gt;    }&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
     </div>
-    <div class="scrollbar"></div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#class的基本用法"><span class="toc-number">1.</span> <span class="toc-text">class的基本用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES6的类，完全可以看作是构造函数的另一种方法。"><span class="toc-number">1.1.</span> <span class="toc-text">ES6的类，完全可以看作是构造函数的另一种方法。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#严格模式"><span class="toc-number">1.2.</span> <span class="toc-text">严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constructor方法"><span class="toc-number">1.3.</span> <span class="toc-text">constructor方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类不存在变量提升"><span class="toc-number">1.4.</span> <span class="toc-text">类不存在变量提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有方法与私有属性"><span class="toc-number">1.5.</span> <span class="toc-text">私有方法与私有属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this指向问题"><span class="toc-number">1.6.</span> <span class="toc-text">this指向问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name属性"><span class="toc-number">1.7.</span> <span class="toc-text">name属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class的静态方法"><span class="toc-number">1.8.</span> <span class="toc-text">class的静态方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-target属性"><span class="toc-number">1.9.</span> <span class="toc-text">new.target属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class的继承"><span class="toc-number">2.</span> <span class="toc-text">Class的继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-getPrototypeOf-方法"><span class="toc-number">2.1.</span> <span class="toc-text">Object.getPrototypeOf()方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super关键字"><span class="toc-number">2.2.</span> <span class="toc-text">super关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class的prototype属性与proto属性"><span class="toc-number">2.3.</span> <span class="toc-text">class的prototype属性与proto属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例的proto属性"><span class="toc-number">2.3.1.</span> <span class="toc-text">实例的proto属性</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </span>
 </div>
-    <div class="section">
-        <div class="article">
-    <div class='main'>
-        <h1 class="title">ES6 - class的基本用法与继承</h1>
-        <div class="stuff">
-            <span>六月 21, 2018</span>
-            
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/ES6/">ES6</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/Javascript/">Javascript</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/class/">class</a></li></ul>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        ES6 - class的基本用法与继承
+    </h1>
 
 
-        </div>
-        <div class="content markdown">
-            <blockquote><p>本文参考于ECMAScript 6 入门–阮一峰 <a href="http://es6.ruanyifeng.com/#docs/class" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/class</a></p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">pino</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-06-21T11:07:40.229Z" itemprop="datePublished">2018-06-21</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/ES6/" rel="tag">ES6</a>, <a class="tag-link" href="/tags/Javascript/" rel="tag">Javascript</a>, <a class="tag-link" href="/tags/class/" rel="tag">class</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote><p>本文参考于ECMAScript 6 入门–阮一峰 <a href="http://es6.ruanyifeng.com/#docs/class" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/class</a></p>
 </blockquote>
 <h2 id="class的基本用法"><a href="#class的基本用法" class="headerlink" title="class的基本用法"></a>class的基本用法</h2><p>在JS语言中，生成实力对象的传统方法是通过构造函数。<br>而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。<br>实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。</p>
-<table><tr><td bgcolor="#D1EEEE">   例： //定义类<br>    class Point {<br>        constructor(x, y) {<br>            this.x = x;<br>            this.y = y;<br>        }<br><br>        toString() {<br>            return ‘(‘ + this.x + ‘,’ + this.y + ‘)’;<br>        }<br>    }<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>   例： //定义类<br>    class Point {<br>        constructor(x, y) {<br>            this.x = x;<br>            this.y = y;<br>        }<br><br>        toString() {<br>            return ‘(‘ + this.x + ‘,’ + this.y + ‘)’;<br>        }<br>    }<br></td></tr></table>
 
 <a id="more"></a>
 <p>(上面代码定义了一个”类“，里面包含一个构造方法(constructor),代表实例对象的this关键字，因此可以说，ES5的构造函数Point对应的是ES6的Point类的构造方法。此例子中Point类除了构造方法，还定义了一个toString方法。)<br>(注：定义“类”的方法的时候，前面不需要加<font color="#dd0000">function</font>关键字，以及方法之间也<font color="#dd0000">不需要逗号隔开</font>，直接把函数定义放进去就ok了～)</p>
 <h3 id="ES6的类，完全可以看作是构造函数的另一种方法。"><a href="#ES6的类，完全可以看作是构造函数的另一种方法。" class="headerlink" title="ES6的类，完全可以看作是构造函数的另一种方法。"></a>ES6的类，完全可以看作是构造函数的另一种方法。</h3><p>构造函数的prototype属性，在ES6的“类”上面继续存在。事实上，<font color="#dd0000">类的所有方法都定义在了类的prototype属性上面</font>。因此，在类的实例上面调用方法，其实就是在调用原型上面的方法。</p>
-<table><tr><td bgcolor="#D1EEEE">   例： class Point {<br>        constructor() {}<br>        toString() {}<br>        toValue() {}<br>    }<br>    //等同于<br>    Point.prototype = {<br>        constructor() {},<br>        toString() {},<br>        toValue() {},<br>    };<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>   例： class Point {<br>        constructor() {}<br>        toString() {}<br>        toValue() {}<br>    }<br>    //等同于<br>    Point.prototype = {<br>        constructor() {},<br>        toString() {},<br>        toValue() {},<br>    };<br></td></tr></table>
 
 <p>另外，类的内部定义的所有方法都是不可枚举的。这一点与ES5行为不一样～</p>
 <h3 id="严格模式"><a href="#严格模式" class="headerlink" title="严格模式"></a>严格模式</h3><p>类和模块的内部，默认的就是严格模式，所以就不需要使用<font color="#dd0000">use strict</font>去指定运行模式～</p>
@@ -76,23 +153,23 @@
 <h3 id="类不存在变量提升"><a href="#类不存在变量提升" class="headerlink" title="类不存在变量提升"></a>类不存在变量提升</h3><p>与ES5不同的是，类不存在变量提升～</p>
 <h3 id="私有方法与私有属性"><a href="#私有方法与私有属性" class="headerlink" title="私有方法与私有属性"></a>私有方法与私有属性</h3><p>ES6不提供私有方法，只能通过变通方法模拟实现～<br>可分为三种类型：<br>    1.在命名上加以区分–（例：<font color="#dd0000">_bar</font>，在名字前加上下划线，表示这是一个只限于内部使用的私有方法；这种命名不保险，在类外部，还是可以调用到这个方法～）<br>    2.将私有方法移出模块(因为模块内部的所有方法都是对外可见的)～<br>    3.利用Symbol值的唯一性，将私有方法的名字命名为一个Symbol值～<br>同样，ES6不支持私有属性，为class加私有属性有一个提案，即在属性名字之前加一个#号，例：#x～</p>
 <h3 id="this指向问题"><a href="#this指向问题" class="headerlink" title="this指向问题"></a>this指向问题</h3><p>类方法内若含有<font color="#dd0000">this</font>,那么它默认指向类的实例；但是当你单独使用该方法时，会有可能报错～</p>
-<table><tr><td bgcolor="#D1EEEE">   例：class Logger {<br>            printName(name = ‘there’) {<br>                this.print(‘Hellp $(name)’);<br>            }<br>            print(text) {<br>                console.log(text);<br>            }<br>        }<br>        const logger = new Logger();<br>        const { printName } = logger;<br>        printName();  //报错，’print’ undefined<br>        //因为方法单独使用，this会指向方法运行时所在的环境，因此回找不到print方法而报错<br></td></tr></table><table><tr><td bgcolor="#D1EEEE">解决方法可为：<br>    1.在构造函数中绑定this～<br>     例：class Logger {<br>            constructor() {<br>            this.printName = this.printName.bind(this);<br>            }<br>        }<br>    2.使用箭头函数～<br>    3.使用Proxy，在获取方法的时候，自动获取this～</td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>   例：class Logger {<br>            printName(name = ‘there’) {<br>                this.print(‘Hellp $(name)’);<br>            }<br>            print(text) {<br>                console.log(text);<br>            }<br>        }<br>        const logger = new Logger();<br>        const { printName } = logger;<br>        printName();  //报错，’print’ undefined<br>        //因为方法单独使用，this会指向方法运行时所在的环境，因此回找不到print方法而报错<br></td></tr></table><table><tr><td bgcolor=#D1EEEE>解决方法可为：<br>    1.在构造函数中绑定this～<br>     例：class Logger {<br>            constructor() {<br>            this.printName = this.printName.bind(this);<br>            }<br>        }<br>    2.使用箭头函数～<br>    3.使用Proxy，在获取方法的时候，自动获取this～</td></tr></table>
 
 <h3 id="name属性"><a href="#name属性" class="headerlink" title="name属性"></a>name属性</h3><p>本质上ES6的类只是ES5的构造函数的一层包装，所以函数的许多特想搜会被Class继承，包括name属性～</p>
-<table><tr><td bgcolor="#D1EEEE"> 例： class Point {}<br>    Point.name //“Point”<br>    //name属性总是会返回紧跟在class关键字后面的类名～<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE> 例： class Point {}<br>    Point.name //“Point”<br>    //name属性总是会返回紧跟在class关键字后面的类名～<br></td></tr></table>
 
 <h3 id="class的静态方法"><a href="#class的静态方法" class="headerlink" title="class的静态方法"></a>class的静态方法</h3><p>ES6中的<font color="#dd0000">类相当于实例的原型</font>，所有在类中定义的方法都会被实例继承。<br>”静态方法“为：在一个方法前加上<font color="#dd0000">static</font>关键字，就表示这个方法不会被实例继承，而是直接通过类来调用～</p>
-<table><tr><td bgcolor="#D1EEEE"> 例： class Foo {<br>        static classMethod() {<br>        return ‘hello’;<br>        }<br>    }<br>    Foo.classMethod() // ‘hello’<br>    var foo = new Foo();<br>    foo.classMethod()     // TypeError: foo.classMethod is not a function<br></td></tr></table><br>(注：<font color="#dd0000">若静态方法中包含this关键字，这个this指的是类，不是实例～</font>)<br>另外，静态方法可以与非静态方法重名，父类的静态方法可以被子类继承～<br>静态方法也可从<font color="#dd0000">super</font>对象上调用～<br><br><table><tr><td bgcolor="#D1EEEE"> 例： class Foo {<br>        static classMethod() {<br>            return ‘hello’;<br>        }<br>    }<br>    class Bar extends Foo {<br>        static classMethod() {<br>            return super.classMethod() + ‘, too’;<br>        }<br>    }<br>    Bar.classMethod() // “hello, too”<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE> 例： class Foo {<br>        static classMethod() {<br>        return ‘hello’;<br>        }<br>    }<br>    Foo.classMethod() // ‘hello’<br>    var foo = new Foo();<br>    foo.classMethod()     // TypeError: foo.classMethod is not a function<br></td></tr></table><br>(注：<font color="#dd0000">若静态方法中包含this关键字，这个this指的是类，不是实例～</font>)<br>另外，静态方法可以与非静态方法重名，父类的静态方法可以被子类继承～<br>静态方法也可从<font color="#dd0000">super</font>对象上调用～<br><br><table><tr><td bgcolor=#D1EEEE> 例： class Foo {<br>        static classMethod() {<br>            return ‘hello’;<br>        }<br>    }<br>    class Bar extends Foo {<br>        static classMethod() {<br>            return super.classMethod() + ‘, too’;<br>        }<br>    }<br>    Bar.classMethod() // “hello, too”<br></td></tr></table>
 
 <h3 id="new-target属性"><a href="#new-target属性" class="headerlink" title="new.target属性"></a>new.target属性</h3><p>ES6为new引入了一个<font color="#dd0000">new.target</font>属性，一般用于构造函数之中，返回new命令作用于的构造函数～<br>若函数不是通过new命令调用的，那么new.target会返回undefined，由此可以用此来确定构造函数是怎么调用的～</p>
-<table><tr><td bgcolor="#D1EEEE"> 例： function Person(name) {<br>        if (new.target !== undefined) {<br>            this.name = name;<br>        } else {<br>            throw new Error(‘必须使用 new 命令生成实例’);<br>        }<br>    }<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE> 例： function Person(name) {<br>        if (new.target !== undefined) {<br>            this.name = name;<br>        } else {<br>            throw new Error(‘必须使用 new 命令生成实例’);<br>        }<br>    }<br></td></tr></table>
 
-<table><tr><td bgcolor="#D1EEEE"> // 另一种写法<br>    function Person(name) {<br>        if (new.target === Person) {<br>            this.name = name;<br>        } else {<br>            throw new Error(‘必须使用 new 命令生成实例’);<br>        }<br>    }<br><br>    var person = new Person(‘张三’); // 正确<br>    var notAPerson = Person.call(person, ‘张三’);  // 报错<br>class内部调用new.target，返回当前class～<br>(注：子类继承父类时，new.target会返回子类～在函数外部，使用new.target会报错～)<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE> // 另一种写法<br>    function Person(name) {<br>        if (new.target === Person) {<br>            this.name = name;<br>        } else {<br>            throw new Error(‘必须使用 new 命令生成实例’);<br>        }<br>    }<br><br>    var person = new Person(‘张三’); // 正确<br>    var notAPerson = Person.call(person, ‘张三’);  // 报错<br>class内部调用new.target，返回当前class～<br>(注：子类继承父类时，new.target会返回子类～在函数外部，使用new.target会报错～)<br></td></tr></table>
 
 <h2 id="Class的继承"><a href="#Class的继承" class="headerlink" title="Class的继承"></a>Class的继承</h2><p>class可以通过<font color="#dd0000">extends</font>关键字实现继承(继承父类的属性和方法)～</p>
-<p><table><tr><td bgcolor="#D1EEEE"> 例： class Point {}<br>     class ColorPoint extends Point {}<br></td></tr></table><br>子类必须在constructor方法中调用super方法，否则新建实例时回报错。因为子类自己的this对象必须先通过父类的构造函数完成塑造，得到与父类同样的实例属性和方法，然后再对其加工，加上自己的实例属性和方法～<br>若不调用super方法，子类就得不到this对象～<br>ES6的继承机制与ES5不同，ES5继承的实质是先创造子类的实例对象this，然后再将父类的方法添加到this上面(Parent.apply(this)),而ES6的继承机制是先创造父类的实质对象this(所以必须先调用super方法)，然后再用子类的构造函数修改this～<br>(注：1.不管有没有显式定义，任何子类都会有constructor方法，若没有定义，会被默认添加；2.在子类的构造函数中，只有调用super之后，才可以使用this，否则会报错；3.父类的静态方法也会被子类继承～)</p>
+<p><table><tr><td bgcolor=#D1EEEE> 例： class Point {}<br>     class ColorPoint extends Point {}<br></td></tr></table><br>子类必须在constructor方法中调用super方法，否则新建实例时回报错。因为子类自己的this对象必须先通过父类的构造函数完成塑造，得到与父类同样的实例属性和方法，然后再对其加工，加上自己的实例属性和方法～<br>若不调用super方法，子类就得不到this对象～<br>ES6的继承机制与ES5不同，ES5继承的实质是先创造子类的实例对象this，然后再将父类的方法添加到this上面(Parent.apply(this)),而ES6的继承机制是先创造父类的实质对象this(所以必须先调用super方法)，然后再用子类的构造函数修改this～<br>(注：1.不管有没有显式定义，任何子类都会有constructor方法，若没有定义，会被默认添加；2.在子类的构造函数中，只有调用super之后，才可以使用this，否则会报错；3.父类的静态方法也会被子类继承～)</p>
 <h3 id="Object-getPrototypeOf-方法"><a href="#Object-getPrototypeOf-方法" class="headerlink" title="Object.getPrototypeOf()方法"></a>Object.getPrototypeOf()方法</h3><p>Object.getPrototypeOf()方法可以用来从子类上获取父类～</p>
-<p><table><tr><td bgcolor="#D1EEEE"> 例：   Object.getPrototypeOf(ColorPoint) === Point    //true<br></td></tr></table><br>因此，可用此方法判断某个类是否继承了另一个类～</p>
+<p><table><tr><td bgcolor=#D1EEEE> 例：   Object.getPrototypeOf(ColorPoint) === Point    //true<br></td></tr></table><br>因此，可用此方法判断某个类是否继承了另一个类～</p>
 <h3 id="super关键字"><a href="#super关键字" class="headerlink" title="super关键字"></a>super关键字</h3><p><font color="#dd0000">super</font>关键字有两种使用方法：函数或对象～<br>1.函数：super作为函数调用时，代表父类的构造函数～(ES6要求，子类的构造函数必须执行一次super函数)<br>(注：1.super虽代表了父类的构造函数，但是返回的是子类的实例，即super内部的this指的子类；2.作为函数时，super()只能在子类的构造函数之中，用在其他地方回报错～)<br>2.对象：在普通方法中，指向父类的原型对象，在静态方法中，指向父类～<br>(注：1.由于super指向父类的原型对象，所以定义在父类实例上的方法或属性是无法通过super调用的；2.ES6规定，在子类普通方法中通过super调用父类的方法时，方法内部的this指向当前的子类实例；3.用在静态方法中，super将指向父类，而不是父类的原型对象；4.在子类的静态方法中调用父类的方法时，方法内部的this指向当前的子类，而不是子类的实例～)</p>
 <h3 id="class的prototype属性与proto属性"><a href="#class的prototype属性与proto属性" class="headerlink" title="class的prototype属性与proto属性"></a>class的prototype属性与<strong>proto</strong>属性</h3><p>1.子类的<strong>proto</strong>属性表示构造函数的继承，总是指向父类～<br>2.子类prototype属性的<strong>proto</strong>属性表示方法的继承，总是指向父类的prototype属性～<br>(注：可以理解为作为一个对象，子类的原型(<strong>proto</strong>属性)是父类；作为一个构造函数，子类的原型对象(prototype属性)是父类的原型对象(prototype属性)的实例～)</p>
 <h4 id="实例的proto属性"><a href="#实例的proto属性" class="headerlink" title="实例的proto属性"></a>实例的<strong>proto</strong>属性</h4><p>子类实例的<strong>proto</strong>属性的<strong>proto</strong>属性，指向父类实例的<strong>proto</strong>属性，即子类的原型的原型，是父类的原型</p>
@@ -101,106 +178,118 @@
 ### Create a new post
 
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
 <h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
 <h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html">Deployment</a> –&gt;</p>
--->
-            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
-            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
-                <source type="audio/mpeg" src="">
-            </audio>
-            
-                <ul id="audio-list" style="display:none">
-                    
-                </ul>
-            
-        </div>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a> –&gt;</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
         
-    <div id='gitalk-container' class="comment link"
-        data-ae='false'
-        data-ci=''
-        data-cs=''
-        data-r=''
-        data-o=''
-        data-a=''
-        data-d='false'
-    >查看评论</div>
+      </ul>
+    </div>
 
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#class的基本用法"><span class="toc-number">1.</span> <span class="toc-text">class的基本用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES6的类，完全可以看作是构造函数的另一种方法。"><span class="toc-number">1.1.</span> <span class="toc-text">ES6的类，完全可以看作是构造函数的另一种方法。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#严格模式"><span class="toc-number">1.2.</span> <span class="toc-text">严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constructor方法"><span class="toc-number">1.3.</span> <span class="toc-text">constructor方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类不存在变量提升"><span class="toc-number">1.4.</span> <span class="toc-text">类不存在变量提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有方法与私有属性"><span class="toc-number">1.5.</span> <span class="toc-text">私有方法与私有属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this指向问题"><span class="toc-number">1.6.</span> <span class="toc-text">this指向问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name属性"><span class="toc-number">1.7.</span> <span class="toc-text">name属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class的静态方法"><span class="toc-number">1.8.</span> <span class="toc-text">class的静态方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-target属性"><span class="toc-number">1.9.</span> <span class="toc-text">new.target属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class的继承"><span class="toc-number">2.</span> <span class="toc-text">Class的继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-getPrototypeOf-方法"><span class="toc-number">2.1.</span> <span class="toc-text">Object.getPrototypeOf()方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super关键字"><span class="toc-number">2.2.</span> <span class="toc-text">super关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class的prototype属性与proto属性"><span class="toc-number">2.3.</span> <span class="toc-text">class的prototype属性与proto属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例的proto属性"><span class="toc-number">2.3.1.</span> <span class="toc-text">实例的proto属性</span></a></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/" target="_blank" rel="noopener"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&text=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&title=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&is_video=false&description=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ES6 - class的基本用法与继承&body=Check out this article: http://yoursite.com/2018/06/21/class(%E7%B1%BB)/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&title=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&title=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&title=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&title=ES6 - class的基本用法与继承" target="_blank" rel="noopener"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/06/21/class(%E7%B1%BB)/&name=ES6 - class的基本用法与继承&description=&lt;blockquote&gt;&lt;p&gt;本文参考于ECMAScript 6 入门–阮一峰 &lt;a href=&#34;http://es6.ruanyifeng.com/#docs/class&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://es6.ruanyifeng.com/#docs/class&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;class的基本用法&#34;&gt;&lt;a href=&#34;#class的基本用法&#34; class=&#34;headerlink&#34; title=&#34;class的基本用法&#34;&gt;&lt;/a&gt;class的基本用法&lt;/h2&gt;&lt;p&gt;在JS语言中，生成实力对象的传统方法是通过构造函数。&lt;br&gt;而ES6引入了class(类)这个概念，作为对象的模板。通过class关键字，可以去定义类。&lt;br&gt;实际上，ES6的class可以看作只是一个语法糖，它的绝大部分功能ES5其实都可以做到。&lt;/p&gt;
+&lt;table&gt;&lt;tr&gt;&lt;td bgcolor=#D1EEEE&gt;   例： //定义类&lt;br&gt;    class Point {&lt;br&gt;        constructor(x, y) {&lt;br&gt;            this.x = x;&lt;br&gt;            this.y = y;&lt;br&gt;        }&lt;br&gt;&lt;br&gt;        toString() {&lt;br&gt;            return ‘(‘ + this.x + ‘,’ + this.y + ‘)’;&lt;br&gt;        }&lt;br&gt;    }&lt;br&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
     </div>
-    
-        <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#class的基本用法"><span class="toc-number">1.</span> <span class="toc-text">class的基本用法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#ES6的类，完全可以看作是构造函数的另一种方法。"><span class="toc-number">1.1.</span> <span class="toc-text">ES6的类，完全可以看作是构造函数的另一种方法。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#严格模式"><span class="toc-number">1.2.</span> <span class="toc-text">严格模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#constructor方法"><span class="toc-number">1.3.</span> <span class="toc-text">constructor方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#类不存在变量提升"><span class="toc-number">1.4.</span> <span class="toc-text">类不存在变量提升</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#私有方法与私有属性"><span class="toc-number">1.5.</span> <span class="toc-text">私有方法与私有属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#this指向问题"><span class="toc-number">1.6.</span> <span class="toc-text">this指向问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#name属性"><span class="toc-number">1.7.</span> <span class="toc-text">name属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class的静态方法"><span class="toc-number">1.8.</span> <span class="toc-text">class的静态方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#new-target属性"><span class="toc-number">1.9.</span> <span class="toc-text">new.target属性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class的继承"><span class="toc-number">2.</span> <span class="toc-text">Class的继承</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Object-getPrototypeOf-方法"><span class="toc-number">2.1.</span> <span class="toc-text">Object.getPrototypeOf()方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#super关键字"><span class="toc-number">2.2.</span> <span class="toc-text">super关键字</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#class的prototype属性与proto属性"><span class="toc-number">2.3.</span> <span class="toc-text">class的prototype属性与proto属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#实例的proto属性"><span class="toc-number">2.3.1.</span> <span class="toc-text">实例的proto属性</span></a></li></ol></li></ol></li></ol>
-        </div>
-    
-</div>
 
-
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
     </div>
+
+  </div>
 </div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 Zhu Xue
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
 </body>
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
-<script src="/js/plugin.js"></script>
-<script src="/js/diaspora.js"></script>
-<link rel="stylesheet" href="/photoswipe/photoswipe.css">
-<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
-<script src="/photoswipe/photoswipe.min.js"></script>
-<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-                <!--  Controls are self-explanatory. Order can be changed. -->
-                <div class="pswp__counter"></div>
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
 </html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

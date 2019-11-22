@@ -1,172 +1,257 @@
-
 <!DOCTYPE html>
-<html lang="" class="loading">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>pino</title>
-
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="google" content="notranslate" />
-    <meta name="keywords" content="Fechin,"> 
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="本文参考于ECMAScript 6 入门–阮一峰 http:&#x2F;&#x2F;es6.ruanyifeng.com&#x2F;#docs&#x2F;class  传统方法ES6 诞生以前，异步编程的方法，大概有下面四种： 1.回调函数2.事件监听3.发布&#x2F;订阅4.Promise 对象  基本概念异步所谓”异步”，简单说就是一个任务不是连续完成的，可以理解成该任务被人为分成两段，先执行第一段，然后转而执行其他任务，等做好了准备或者是">
+<meta name="keywords" content="-JavaScript -ES6 -generator">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6--generator函数的异步知识">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;22&#x2F;generator%E7%9A%84%E5%BC%82%E6%AD%A5&#x2F;index.html">
+<meta property="og:site_name" content="pino">
+<meta property="og:description" content="本文参考于ECMAScript 6 入门–阮一峰 http:&#x2F;&#x2F;es6.ruanyifeng.com&#x2F;#docs&#x2F;class  传统方法ES6 诞生以前，异步编程的方法，大概有下面四种： 1.回调函数2.事件监听3.发布&#x2F;订阅4.Promise 对象  基本概念异步所谓”异步”，简单说就是一个任务不是连续完成的，可以理解成该任务被人为分成两段，先执行第一段，然后转而执行其他任务，等做好了准备或者是">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-03-15T07:13:51.844Z">
+<meta name="twitter:card" content="summary">
     
-    <meta name="author" content="Zhu Xue"> 
-    <link rel="alternative" href="atom.xml" title="pino" type="application/atom+xml"> 
-    <link rel="icon" href="/assets/img.png"> 
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <link rel="stylesheet" href="/css/diaspora.css">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-8691406134231910",
-        enable_page_level_ads: true
-      });
-    </script>
-
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>ES6--generator函数的异步知识</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
 </head>
 
-<body class="loading">
-    <div id="loader"></div>
-    <div id="single">
-    <div id="top" style="display: block;">
-    <div class="bar" style="width: 0;"></div>
-    <a class="icon-home image-icon" href="javascript:;"></a>
-    <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">ES6--generator函数的异步知识</h3>
-    <div class="social">
-        <!--<div class="like-icon">-->
-            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
-        <!--</div>-->
-        <div>
-            <div class="share">
-                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
-            </div>
-            <div id="qr"></div>
-        </div>
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2019/03/15/Git%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/08/21/generator%E7%9A%84%E5%AD%A6%E4%B9%A0/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/" target="_blank" rel="noopener"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&text=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&title=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&is_video=false&description=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ES6--generator函数的异步知识&body=Check out this article: http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&title=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&title=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&title=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&title=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&name=ES6--generator函数的异步知识&description=" target="_blank" rel="noopener"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
     </div>
-    <div class="scrollbar"></div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#传统方法"><span class="toc-number">1.</span> <span class="toc-text">传统方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-number">2.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#异步"><span class="toc-number">2.1.</span> <span class="toc-text">异步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回调函数"><span class="toc-number">2.2.</span> <span class="toc-text">回调函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Promise"><span class="toc-number">2.3.</span> <span class="toc-text">Promise</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Generator-函数"><span class="toc-number">2.4.</span> <span class="toc-text">Generator 函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#语法糖"><span class="toc-number">3.</span> <span class="toc-text">语法糖</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#async-函数"><span class="toc-number">3.1.</span> <span class="toc-text">async 函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本用法"><span class="toc-number">3.2.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#语法"><span class="toc-number">3.3.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用注意点"><span class="toc-number">3.4.</span> <span class="toc-text">使用注意点</span></a></li></ol></li></ol>
+    </div>
+  </span>
 </div>
-    <div class="section">
-        <div class="article">
-    <div class='main'>
-        <h1 class="title">ES6--generator函数的异步知识</h1>
-        <div class="stuff">
-            <span>八月 22, 2018</span>
-            
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/JavaScript-ES6-generator/">-JavaScript -ES6 -generator</a></li></ul>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        ES6--generator函数的异步知识
+    </h1>
 
 
-        </div>
-        <div class="content markdown">
-            <blockquote><p>本文参考于ECMAScript 6 入门–阮一峰 <a href="http://es6.ruanyifeng.com/#docs/class" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/class</a></p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">pino</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-08-22T03:20:33.000Z" itemprop="datePublished">2018-08-22</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JavaScript-ES6-generator/" rel="tag">-JavaScript -ES6 -generator</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote><p>本文参考于ECMAScript 6 入门–阮一峰 <a href="http://es6.ruanyifeng.com/#docs/class" target="_blank" rel="noopener">http://es6.ruanyifeng.com/#docs/class</a></p>
 </blockquote>
 <h3 id="传统方法"><a href="#传统方法" class="headerlink" title="传统方法"></a>传统方法</h3><p>ES6 诞生以前，异步编程的方法，大概有下面四种：</p>
-<table><tr><td bgcolor="#D1EEEE">1.回调函数<br>2.事件监听<br>3.发布/订阅<br>4.Promise 对象<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>1.回调函数<br>2.事件监听<br>3.发布/订阅<br>4.Promise 对象<br></td></tr></table>
 
 <h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><h4 id="异步"><a href="#异步" class="headerlink" title="异步"></a>异步</h4><p>所谓”异步”，简单说就是一个任务不是连续完成的，可以理解成该任务被人为分成两段，先执行第一段，然后转而执行其他任务，等做好了准备或者是第一段已经完成，再回过头执行第二段～<br>相应地，连续的执行就叫做同步；由于是连续执行，不能插入其他任务，所以操作系统从硬盘读取文件的这段时间，程序只能干等着～</p>
 <h4 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h4><p>回调函数，就是把任务的第二段单独写在一个函数里面，等到重新执行这个任务的时候，就直接调用这个函数～</p>
 <h4 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h4><p>之前有详细解释，请看之前的博客～</p>
 <h4 id="Generator-函数"><a href="#Generator-函数" class="headerlink" title="Generator 函数"></a>Generator 函数</h4><p>协程：多个线程互相协作，完成异步任务～</p>
-<table><tr><td bgcolor="#D1EEEE">运行流程如下：<br>第一步，协程A开始执行～<br>第二步，协程A执行到一半，进入暂停，执行权转移到协程B～<br>第三步，（一段时间后）协程B交还执行权～<br>第四步，协程A恢复执行～<br>上面流程的协程A，就是异步任务，因为它分成两段（或多段）执行～<br></td></tr></table>那么协程的 Generator 函数是如何实现的？<br>Generator 函数是协程在 ES6 的实现，最大特点就是可以交出函数的执行权（即暂停执行）～<br>整个 Generator 函数就是一个封装的异步任务，或者说是异步任务的容器。异步操作需要暂停的地方，都用yield语句注明～<br><table><tr><td bgcolor="#D1EEEE">function* gen(x) {<br>  var y = yield x + 2;<br>  return y;<br>}<br>var g = gen(1);<br>g.next() // { value: 3, done: false }<br>g.next() // { value: undefined, done: true }<br>解释：<br>上面代码中，调用 Generator 函数，会返回一个内部指针（即遍历器）g。这是 Generator 函数不同于普通函数的另一个地方，即执行它不会返回结果，返回的是指针对象。调用指针g的next方法，会移动内部指针（即执行异步任务的第一段），指向第一个遇到的yield语句，上例是执行到x + 2为止<br></td></tr></table>Generator 函数可以暂停执行和恢复执行，这是它能封装异步任务的根本原因。除此之外，它还有两个特性，使它可以作为异步编程的完整解决方案：函数体内外的数据交换和错误处理机制～<table><tr><td bgcolor="#D1EEEE">next返回值的 value 属性，是 Generator 函数向外输出数据；next方法还可以接受参数，向 Generator 函数体内输入数据～</td></tr></table>Generator 函数内部还可以部署错误处理代码，捕获函数体外抛出的错误～<table><tr><td bgcolor="#D1EEEE">function* gen(x){<br>  try {<br>    var y = yield x + 2;<br>  } catch (e){<br>    console.log(e);<br>  }<br>  return y;<br>}<br>var g = gen(1);<br>g.next();<br>g.throw(‘出错了’);<br>// 出错了<br>上面代码的最后一行，Generator 函数体外，使用指针对象的throw方法抛出的错误，可以被函数体内的try…catch代码块捕获~<br>这意味着，出错的代码与处理错误的代码，实现了时间和空间上的分离，这对于异步编程无疑是很重要的~<br></td></tr></table>
+<table><tr><td bgcolor=#D1EEEE>运行流程如下：<br>第一步，协程A开始执行～<br>第二步，协程A执行到一半，进入暂停，执行权转移到协程B～<br>第三步，（一段时间后）协程B交还执行权～<br>第四步，协程A恢复执行～<br>上面流程的协程A，就是异步任务，因为它分成两段（或多段）执行～<br></td></tr></table>那么协程的 Generator 函数是如何实现的？<br>Generator 函数是协程在 ES6 的实现，最大特点就是可以交出函数的执行权（即暂停执行）～<br>整个 Generator 函数就是一个封装的异步任务，或者说是异步任务的容器。异步操作需要暂停的地方，都用yield语句注明～<br><table><tr><td bgcolor=#D1EEEE>function* gen(x) {<br>  var y = yield x + 2;<br>  return y;<br>}<br>var g = gen(1);<br>g.next() // { value: 3, done: false }<br>g.next() // { value: undefined, done: true }<br>解释：<br>上面代码中，调用 Generator 函数，会返回一个内部指针（即遍历器）g。这是 Generator 函数不同于普通函数的另一个地方，即执行它不会返回结果，返回的是指针对象。调用指针g的next方法，会移动内部指针（即执行异步任务的第一段），指向第一个遇到的yield语句，上例是执行到x + 2为止<br></td></tr></table>Generator 函数可以暂停执行和恢复执行，这是它能封装异步任务的根本原因。除此之外，它还有两个特性，使它可以作为异步编程的完整解决方案：函数体内外的数据交换和错误处理机制～<table><tr><td bgcolor=#D1EEEE>next返回值的 value 属性，是 Generator 函数向外输出数据；next方法还可以接受参数，向 Generator 函数体内输入数据～</td></tr></table>Generator 函数内部还可以部署错误处理代码，捕获函数体外抛出的错误～<table><tr><td bgcolor=#D1EEEE>function* gen(x){<br>  try {<br>    var y = yield x + 2;<br>  } catch (e){<br>    console.log(e);<br>  }<br>  return y;<br>}<br>var g = gen(1);<br>g.next();<br>g.throw(‘出错了’);<br>// 出错了<br>上面代码的最后一行，Generator 函数体外，使用指针对象的throw方法抛出的错误，可以被函数体内的try…catch代码块捕获~<br>这意味着，出错的代码与处理错误的代码，实现了时间和空间上的分离，这对于异步编程无疑是很重要的~<br></td></tr></table>
 
-<h3 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h3><h4 id="async-函数"><a href="#async-函数" class="headerlink" title="async 函数"></a>async 函数</h4><p>async 函数就是 Generator 函数的语法糖～<br>实际上，async函数就是将 Generator 函数的星号（*）替换成async，将yield替换成await～<table><tr><td bgcolor="#D1EEEE">async函数对 Generator 函数的改进，体现在以下四点：<br>（1）内置执行器<br>async函数的执行，与普通函数一模一样，只要一行。<br>    asyncReadFile();<br>（2）更好的语义<br>async和await，比起星号和yield，语义更清楚了；async表示函数里有异步操作，await表示紧跟在后面的表达式需要等待结果～<br>（3）更广的适用性<br>co模块约定，yield命令后面只能是 Thunk 函数或 Promise 对象，而async函数的await命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时等同于同步操作）～<br>（4）返回值是 Promise<br>async函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了，你可以用then方法指定下一步的操作～<br>进一步说，async函数完全可以看作多个异步操作，包装成的一个 Promise 对象，而await命令就是内部then命令的语法糖～<br></td></tr></table></p>
-<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>async函数返回一个 Promise 对象，可以使用then方法添加回调函数，当函数执行的时候，一旦遇到await就会先返回，等到异步操作完成，再接着执行函数体内后面的语句～<table><tr><td bgcolor="#D1EEEE">function timeout(ms) {<br>  return new Promise((resolve) =&gt; {<br>    setTimeout(resolve, ms);<br>  });<br>}<br>async function asyncPrint(value, ms) {<br>  await timeout(ms);<br>  console.log(value);<br>}<br>asyncPrint(‘hello world’, 50);<br>上面代码指定 50 毫秒以后，输出hello world<br></td></tr></table></p>
-<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>1.返回 Promise 对象<br>async函数返回一个 Promise 对象～<br>async函数内部return语句返回的值，会成为then方法回调函数的参数～<table><tr><td bgcolor="#D1EEEE">async function f() {<br>  return ‘hello world’;<br>}<br>f().then(v =&gt; console.log(v))<br>// “hello world”<br>上面代码中，函数f内部return命令返回的值，会被then方法回调函数接收到～<br>async函数内部抛出错误，会导致返回的 Promise 对象变为reject状态，抛出的错误对象会被catch方法回调函数接收到～<br>async function f() {<br>  throw new Error(‘出错了’);<br>}<br>f().then(<br>  v =&gt; console.log(v),<br>  e =&gt; console.log(e)<br>)<br>// Error: 出错了<br></td></tr></table>2.Promise 对象的状态变化<table><tr><td bgcolor="#D1EEEE">async函数返回的 Promise 对象，必须等到内部所有await命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到return语句或者抛出错误～<br>也就是说，只有async函数内部的异步操作执行完，才会执行then方法指定的回调函数～</td></tr></table>3.await 命令<table><tr><td bgcolor="#D1EEEE">正常情况下，await命令后面是一个 Promise 对象；如果不是，会被转成一个立即resolve的 Promise 对象～<br>await命令后面的 Promise 对象如果变为reject状态，则reject的参数会被catch方法的回调函数接收到～<br>只要一个await语句后面的 Promise 变为reject，那么整个async函数都会中断执行～</td></tr></table>那么即使前一个异步操作失败，也不要中断后面的异步操作的方法是什么呢？<table><tr><td bgcolor="#D1EEEE">1.await放在try…catch结构里面，这样不管这个异步操作是否成功，第二个await都会执行～<br>async function f() {<br>  try {<br>    await Promise.reject(‘出错了’);<br>  } catch(e) {<br>  }<br>  return await Promise.resolve(‘hello world’);<br>}<br>f()<br>.then(v =&gt; console.log(v))<br>// hello world<br>2.await后面的 Promise 对象再跟一个catch方法，处理前面可能出现的错误～<br>async function f() {<br>  await Promise.reject(‘出错了’)<br>    .catch(e =&gt; console.log(e));<br>  return await Promise.resolve(‘hello world’);<br>}<br>f()<br>.then(v =&gt; console.log(v))<br>// 出错了<br>// hello world<br></td></tr></table>4.错误处理<br>如果await后面的异步操作出错，那么等同于async函数返回的 Promise 对象被reject～<br>防止出错的方法，也是将其放在try…catch代码块之中～<br>如果有多个await命令，可以统一放在try…catch结构中～</p>
-<h4 id="使用注意点"><a href="#使用注意点" class="headerlink" title="使用注意点"></a>使用注意点</h4><table><tr><td bgcolor="#D1EEEE">1.最好把await命令放在try…catch代码块中～<br>2.多个await命令后面的异步操作，如果不存在继发关系，最好让它们同时触发～<br>3.await命令只能用在async函数之中，如果用在普通函数，就会报错～<br></td></tr></table>
-            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
-            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
-                <source type="audio/mpeg" src="">
-            </audio>
-            
-                <ul id="audio-list" style="display:none">
-                    
-                </ul>
-            
-        </div>
+<h3 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h3><h4 id="async-函数"><a href="#async-函数" class="headerlink" title="async 函数"></a>async 函数</h4><p>async 函数就是 Generator 函数的语法糖～<br>实际上，async函数就是将 Generator 函数的星号（*）替换成async，将yield替换成await～<table><tr><td bgcolor=#D1EEEE>async函数对 Generator 函数的改进，体现在以下四点：<br>（1）内置执行器<br>async函数的执行，与普通函数一模一样，只要一行。<br>    asyncReadFile();<br>（2）更好的语义<br>async和await，比起星号和yield，语义更清楚了；async表示函数里有异步操作，await表示紧跟在后面的表达式需要等待结果～<br>（3）更广的适用性<br>co模块约定，yield命令后面只能是 Thunk 函数或 Promise 对象，而async函数的await命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时等同于同步操作）～<br>（4）返回值是 Promise<br>async函数的返回值是 Promise 对象，这比 Generator 函数的返回值是 Iterator 对象方便多了，你可以用then方法指定下一步的操作～<br>进一步说，async函数完全可以看作多个异步操作，包装成的一个 Promise 对象，而await命令就是内部then命令的语法糖～<br></td></tr></table></p>
+<h4 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h4><p>async函数返回一个 Promise 对象，可以使用then方法添加回调函数，当函数执行的时候，一旦遇到await就会先返回，等到异步操作完成，再接着执行函数体内后面的语句～<table><tr><td bgcolor=#D1EEEE>function timeout(ms) {<br>  return new Promise((resolve) =&gt; {<br>    setTimeout(resolve, ms);<br>  });<br>}<br>async function asyncPrint(value, ms) {<br>  await timeout(ms);<br>  console.log(value);<br>}<br>asyncPrint(‘hello world’, 50);<br>上面代码指定 50 毫秒以后，输出hello world<br></td></tr></table></p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>1.返回 Promise 对象<br>async函数返回一个 Promise 对象～<br>async函数内部return语句返回的值，会成为then方法回调函数的参数～<table><tr><td bgcolor=#D1EEEE>async function f() {<br>  return ‘hello world’;<br>}<br>f().then(v =&gt; console.log(v))<br>// “hello world”<br>上面代码中，函数f内部return命令返回的值，会被then方法回调函数接收到～<br>async函数内部抛出错误，会导致返回的 Promise 对象变为reject状态，抛出的错误对象会被catch方法回调函数接收到～<br>async function f() {<br>  throw new Error(‘出错了’);<br>}<br>f().then(<br>  v =&gt; console.log(v),<br>  e =&gt; console.log(e)<br>)<br>// Error: 出错了<br></td></tr></table>2.Promise 对象的状态变化<table><tr><td bgcolor=#D1EEEE>async函数返回的 Promise 对象，必须等到内部所有await命令后面的 Promise 对象执行完，才会发生状态改变，除非遇到return语句或者抛出错误～<br>也就是说，只有async函数内部的异步操作执行完，才会执行then方法指定的回调函数～</td></tr></table>3.await 命令<table><tr><td bgcolor=#D1EEEE>正常情况下，await命令后面是一个 Promise 对象；如果不是，会被转成一个立即resolve的 Promise 对象～<br>await命令后面的 Promise 对象如果变为reject状态，则reject的参数会被catch方法的回调函数接收到～<br>只要一个await语句后面的 Promise 变为reject，那么整个async函数都会中断执行～</td></tr></table>那么即使前一个异步操作失败，也不要中断后面的异步操作的方法是什么呢？<table><tr><td bgcolor=#D1EEEE>1.await放在try…catch结构里面，这样不管这个异步操作是否成功，第二个await都会执行～<br>async function f() {<br>  try {<br>    await Promise.reject(‘出错了’);<br>  } catch(e) {<br>  }<br>  return await Promise.resolve(‘hello world’);<br>}<br>f()<br>.then(v =&gt; console.log(v))<br>// hello world<br>2.await后面的 Promise 对象再跟一个catch方法，处理前面可能出现的错误～<br>async function f() {<br>  await Promise.reject(‘出错了’)<br>    .catch(e =&gt; console.log(e));<br>  return await Promise.resolve(‘hello world’);<br>}<br>f()<br>.then(v =&gt; console.log(v))<br>// 出错了<br>// hello world<br></td></tr></table>4.错误处理<br>如果await后面的异步操作出错，那么等同于async函数返回的 Promise 对象被reject～<br>防止出错的方法，也是将其放在try…catch代码块之中～<br>如果有多个await命令，可以统一放在try…catch结构中～</p>
+<h4 id="使用注意点"><a href="#使用注意点" class="headerlink" title="使用注意点"></a>使用注意点</h4><table><tr><td bgcolor=#D1EEEE>1.最好把await命令放在try…catch代码块中～<br>2.多个await命令后面的异步操作，如果不存在继发关系，最好让它们同时触发～<br>3.await命令只能用在async函数之中，如果用在普通函数，就会报错～<br></td></tr></table>
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
         
-    <div id='gitalk-container' class="comment link"
-        data-ae='false'
-        data-ci=''
-        data-cs=''
-        data-r=''
-        data-o=''
-        data-a=''
-        data-d='false'
-    >查看评论</div>
+      </ul>
+    </div>
 
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#传统方法"><span class="toc-number">1.</span> <span class="toc-text">传统方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-number">2.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#异步"><span class="toc-number">2.1.</span> <span class="toc-text">异步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回调函数"><span class="toc-number">2.2.</span> <span class="toc-text">回调函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Promise"><span class="toc-number">2.3.</span> <span class="toc-text">Promise</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Generator-函数"><span class="toc-number">2.4.</span> <span class="toc-text">Generator 函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#语法糖"><span class="toc-number">3.</span> <span class="toc-text">语法糖</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#async-函数"><span class="toc-number">3.1.</span> <span class="toc-text">async 函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本用法"><span class="toc-number">3.2.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#语法"><span class="toc-number">3.3.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用注意点"><span class="toc-number">3.4.</span> <span class="toc-text">使用注意点</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/" target="_blank" rel="noopener"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&text=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&title=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&is_video=false&description=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ES6--generator函数的异步知识&body=Check out this article: http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&title=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&title=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&title=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&title=ES6--generator函数的异步知识" target="_blank" rel="noopener"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/22/generator%E7%9A%84%E5%BC%82%E6%AD%A5/&name=ES6--generator函数的异步知识&description=" target="_blank" rel="noopener"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
     </div>
-    
-        <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#传统方法"><span class="toc-number">1.</span> <span class="toc-text">传统方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本概念"><span class="toc-number">2.</span> <span class="toc-text">基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#异步"><span class="toc-number">2.1.</span> <span class="toc-text">异步</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#回调函数"><span class="toc-number">2.2.</span> <span class="toc-text">回调函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Promise"><span class="toc-number">2.3.</span> <span class="toc-text">Promise</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Generator-函数"><span class="toc-number">2.4.</span> <span class="toc-text">Generator 函数</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#语法糖"><span class="toc-number">3.</span> <span class="toc-text">语法糖</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#async-函数"><span class="toc-number">3.1.</span> <span class="toc-text">async 函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基本用法"><span class="toc-number">3.2.</span> <span class="toc-text">基本用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#语法"><span class="toc-number">3.3.</span> <span class="toc-text">语法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#使用注意点"><span class="toc-number">3.4.</span> <span class="toc-text">使用注意点</span></a></li></ol></li></ol>
-        </div>
-    
-</div>
 
-
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
     </div>
+
+  </div>
 </div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 Zhu Xue
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
 </body>
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
-<script src="/js/plugin.js"></script>
-<script src="/js/diaspora.js"></script>
-<link rel="stylesheet" href="/photoswipe/photoswipe.css">
-<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
-<script src="/photoswipe/photoswipe.min.js"></script>
-<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-                <!--  Controls are self-explanatory. Order can be changed. -->
-                <div class="pswp__counter"></div>
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
 </html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

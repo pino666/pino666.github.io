@@ -1,169 +1,254 @@
-
 <!DOCTYPE html>
-<html lang="" class="loading">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>pino</title>
-
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="google" content="notranslate" />
-    <meta name="keywords" content="Fechin,"> 
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="本文参考来源于 网络  this的指向问题在函数中的this到底取何值，是在函数真正被调用执行时确定的，而不是在函数定义时确定的～ 全局环境下在全局模式下，this始终指向全局对象，即window～ 注：无论是否是严格模式，都指向windowconsole.log(this === window); &#x2F;&#x2F; truethis.a = 1216;console.log(window.a); &#x2F;&#x2F; 12">
+<meta name="keywords" content="-JavaScript -this">
+<meta property="og:type" content="article">
+<meta property="og:title" content="this指向">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2018&#x2F;08&#x2F;17&#x2F;this%E6%8C%87%E5%90%91&#x2F;index.html">
+<meta property="og:site_name" content="pino">
+<meta property="og:description" content="本文参考来源于 网络  this的指向问题在函数中的this到底取何值，是在函数真正被调用执行时确定的，而不是在函数定义时确定的～ 全局环境下在全局模式下，this始终指向全局对象，即window～ 注：无论是否是严格模式，都指向windowconsole.log(this === window); &#x2F;&#x2F; truethis.a = 1216;console.log(window.a); &#x2F;&#x2F; 12">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-08-20T08:45:46.313Z">
+<meta name="twitter:card" content="summary">
     
-    <meta name="author" content="Zhu Xue"> 
-    <link rel="alternative" href="atom.xml" title="pino" type="application/atom+xml"> 
-    <link rel="icon" href="/assets/img.png"> 
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
-    <link rel="stylesheet" href="/css/diaspora.css">
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-8691406134231910",
-        enable_page_level_ads: true
-      });
-    </script>
-
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>this指向</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
 </head>
 
-<body class="loading">
-    <div id="loader"></div>
-    <div id="single">
-    <div id="top" style="display: block;">
-    <div class="bar" style="width: 0;"></div>
-    <a class="icon-home image-icon" href="javascript:;"></a>
-    <div title="播放/暂停" class="icon-play"></div>
-    <h3 class="subtitle">this指向</h3>
-    <div class="social">
-        <!--<div class="like-icon">-->
-            <!--<a href="javascript:;" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
-        <!--</div>-->
-        <div>
-            <div class="share">
-                <a title="获取二维码" class="icon-scan" href="javascript:;"></a>
-            </div>
-            <div id="qr"></div>
-        </div>
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2018/08/20/JS%E5%8E%9F%E5%9E%8B%E7%9A%84%E7%90%86%E8%A7%A3/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2018/08/17/JSpromise/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/" target="_blank" rel="noopener"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&text=this指向" target="_blank" rel="noopener"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&title=this指向" target="_blank" rel="noopener"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&is_video=false&description=this指向" target="_blank" rel="noopener"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=this指向&body=Check out this article: http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&title=this指向" target="_blank" rel="noopener"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&title=this指向" target="_blank" rel="noopener"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&title=this指向" target="_blank" rel="noopener"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&title=this指向" target="_blank" rel="noopener"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&name=this指向&description=" target="_blank" rel="noopener"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
     </div>
-    <div class="scrollbar"></div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#this的指向问题"><span class="toc-number">1.</span> <span class="toc-text">this的指向问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局环境下"><span class="toc-number">1.1.</span> <span class="toc-text">全局环境下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作为普通函数直接调用"><span class="toc-number">1.2.</span> <span class="toc-text">作为普通函数直接调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作为对象的属性调用"><span class="toc-number">1.3.</span> <span class="toc-text">作为对象的属性调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在构造函数中调用"><span class="toc-number">1.4.</span> <span class="toc-text">在构造函数中调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-和-apply"><span class="toc-number">1.5.</span> <span class="toc-text">call 和 apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bind"><span class="toc-number">1.6.</span> <span class="toc-text">bind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#箭头函数"><span class="toc-number">1.7.</span> <span class="toc-text">箭头函数</span></a></li></ol></li></ol>
+    </div>
+  </span>
 </div>
-    <div class="section">
-        <div class="article">
-    <div class='main'>
-        <h1 class="title">this指向</h1>
-        <div class="stuff">
-            <span>八月 17, 2018</span>
-            
-  <ul class="post-tags-list"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/JavaScript-this/">-JavaScript -this</a></li></ul>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        this指向
+    </h1>
 
 
-        </div>
-        <div class="content markdown">
-            <blockquote><p>本文参考来源于 网络</p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">pino</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-08-17T06:57:26.000Z" itemprop="datePublished">2018-08-17</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JavaScript-this/" rel="tag">-JavaScript -this</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote><p>本文参考来源于 网络</p>
 </blockquote>
 <h2 id="this的指向问题"><a href="#this的指向问题" class="headerlink" title="this的指向问题"></a>this的指向问题</h2><pre><code>在函数中的this到底取何值，是在函数真正被调用执行时确定的，而不是在函数定义时确定的～
 </code></pre><h3 id="全局环境下"><a href="#全局环境下" class="headerlink" title="全局环境下"></a>全局环境下</h3><p>在全局模式下，this始终指向全局对象，即window～</p>
-<p><font color="#dd0000">注：</font>无论是否是严格模式，都指向window<table><tr><td bgcolor="#D1EEEE">console.log(this === window); // true<br>this.a = 1216;<br>console.log(window.a); // 1216<br></td></tr></table></p>
-<h3 id="作为普通函数直接调用"><a href="#作为普通函数直接调用" class="headerlink" title="作为普通函数直接调用"></a>作为普通函数直接调用</h3><p>在普通函数的内部，this也是指向全局对象(严格模式下指向undefined)～<table><tr><td bgcolor="#D1EEEE">function fn(){<br>  return this;<br>}<br>fn() === window; // true<br></td></tr></table></p>
-<h3 id="作为对象的属性调用"><a href="#作为对象的属性调用" class="headerlink" title="作为对象的属性调用"></a>作为对象的属性调用</h3><p>若函数作为对象的一个属性调用时，this指向该对象～<br>但若将对象属性赋值给一变量，再调用函数，则this指向window对象～<br>若多层嵌套的对象，内部this指向离被调用函数最近的对象～<table><tr><td bgcolor="#D1EEEE">var obj = {<br>    x:10,<br>    fn:function(){<br>        console.log(this);<br>        console.log(this.x);<br>    }<br>}<br>obj.fn();  // {x: 10, fn: ƒ}<br>          // 10<br>var fn1 = obj.fn;<br>fn1();  // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}<br>        // undefined<br></td></tr></table></p>
-<h3 id="在构造函数中调用"><a href="#在构造函数中调用" class="headerlink" title="在构造函数中调用"></a>在构造函数中调用</h3><p>在构造函数中，this指向即将被new出来的实例对象～<table><tr><td bgcolor="#D1EEEE">function Foo(){<br>    this.name = ‘pino’;<br>    console.log(this);<br>}<br>var f1 = new Foo();<br>console.log(f1.name);   // pino<br></td></tr></table></p>
-<h3 id="call-和-apply"><a href="#call-和-apply" class="headerlink" title="call 和 apply"></a>call 和 apply</h3><p>当函数通过call()和apply()方法绑定时，this指向两个方法的第一个参数对象上，若第一个参数不是对象，JS内部会尝试将其转化为对象然后再指向它～<table><tr><td bgcolor="#D1EEEE">var obj = {<br>    x:10,<br>    fn:function(){<br>        console.log(this);<br>        console.log(this.x);<br>    }<br>}<br>var fn = function(){<br>    console.log(this);<br>    console.log(this.x);<br>}<br>fn.call(obj);   // {x: 10, fn: ƒ}<br>                // 10<br></td></tr></table></p>
-<h3 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h3><p>通过bind方法绑定后，无论其在什么情况下被调用，函数将被永远绑定在其第一个参数对象上～<br>bind绑定后返回的是一个函数～<table><tr><td bgcolor="#D1EEEE">function f(){<br>  return this.a;<br>}<br>var g = f.bind({a:”啊啊啊”});<br>console.log(g()); // 啊啊啊<br>var o = {a:111, f:f, g:g};<br>console.log(o.f(), o.g()); // 111, 啊啊啊<br></td></tr></table></p>
+<p><font color="#dd0000">注：</font>无论是否是严格模式，都指向window<table><tr><td bgcolor=#D1EEEE>console.log(this === window); // true<br>this.a = 1216;<br>console.log(window.a); // 1216<br></td></tr></table></p>
+<h3 id="作为普通函数直接调用"><a href="#作为普通函数直接调用" class="headerlink" title="作为普通函数直接调用"></a>作为普通函数直接调用</h3><p>在普通函数的内部，this也是指向全局对象(严格模式下指向undefined)～<table><tr><td bgcolor=#D1EEEE>function fn(){<br>  return this;<br>}<br>fn() === window; // true<br></td></tr></table></p>
+<h3 id="作为对象的属性调用"><a href="#作为对象的属性调用" class="headerlink" title="作为对象的属性调用"></a>作为对象的属性调用</h3><p>若函数作为对象的一个属性调用时，this指向该对象～<br>但若将对象属性赋值给一变量，再调用函数，则this指向window对象～<br>若多层嵌套的对象，内部this指向离被调用函数最近的对象～<table><tr><td bgcolor=#D1EEEE>var obj = {<br>    x:10,<br>    fn:function(){<br>        console.log(this);<br>        console.log(this.x);<br>    }<br>}<br>obj.fn();  // {x: 10, fn: ƒ}<br>          // 10<br>var fn1 = obj.fn;<br>fn1();  // Window {postMessage: ƒ, blur: ƒ, focus: ƒ, close: ƒ, frames: Window, …}<br>        // undefined<br></td></tr></table></p>
+<h3 id="在构造函数中调用"><a href="#在构造函数中调用" class="headerlink" title="在构造函数中调用"></a>在构造函数中调用</h3><p>在构造函数中，this指向即将被new出来的实例对象～<table><tr><td bgcolor=#D1EEEE>function Foo(){<br>    this.name = ‘pino’;<br>    console.log(this);<br>}<br>var f1 = new Foo();<br>console.log(f1.name);   // pino<br></td></tr></table></p>
+<h3 id="call-和-apply"><a href="#call-和-apply" class="headerlink" title="call 和 apply"></a>call 和 apply</h3><p>当函数通过call()和apply()方法绑定时，this指向两个方法的第一个参数对象上，若第一个参数不是对象，JS内部会尝试将其转化为对象然后再指向它～<table><tr><td bgcolor=#D1EEEE>var obj = {<br>    x:10,<br>    fn:function(){<br>        console.log(this);<br>        console.log(this.x);<br>    }<br>}<br>var fn = function(){<br>    console.log(this);<br>    console.log(this.x);<br>}<br>fn.call(obj);   // {x: 10, fn: ƒ}<br>                // 10<br></td></tr></table></p>
+<h3 id="bind"><a href="#bind" class="headerlink" title="bind"></a>bind</h3><p>通过bind方法绑定后，无论其在什么情况下被调用，函数将被永远绑定在其第一个参数对象上～<br>bind绑定后返回的是一个函数～<table><tr><td bgcolor=#D1EEEE>function f(){<br>  return this.a;<br>}<br>var g = f.bind({a:”啊啊啊”});<br>console.log(g()); // 啊啊啊<br>var o = {a:111, f:f, g:g};<br>console.log(o.f(), o.g()); // 111, 啊啊啊<br></td></tr></table></p>
 <h3 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h3><p>箭头函数不绑定this， 它会捕获其所在（即定义的位置）上下文的this值， 作为自己的this值～</p>
 
-            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
-            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
-                <source type="audio/mpeg" src="">
-            </audio>
-            
-                <ul id="audio-list" style="display:none">
-                    
-                </ul>
-            
-        </div>
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
         
-    <div id='gitalk-container' class="comment link"
-        data-ae='false'
-        data-ci=''
-        data-cs=''
-        data-r=''
-        data-o=''
-        data-a=''
-        data-d='false'
-    >查看评论</div>
+      </ul>
+    </div>
 
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#this的指向问题"><span class="toc-number">1.</span> <span class="toc-text">this的指向问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局环境下"><span class="toc-number">1.1.</span> <span class="toc-text">全局环境下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作为普通函数直接调用"><span class="toc-number">1.2.</span> <span class="toc-text">作为普通函数直接调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作为对象的属性调用"><span class="toc-number">1.3.</span> <span class="toc-text">作为对象的属性调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在构造函数中调用"><span class="toc-number">1.4.</span> <span class="toc-text">在构造函数中调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-和-apply"><span class="toc-number">1.5.</span> <span class="toc-text">call 和 apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bind"><span class="toc-number">1.6.</span> <span class="toc-text">bind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#箭头函数"><span class="toc-number">1.7.</span> <span class="toc-text">箭头函数</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/" target="_blank" rel="noopener"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&text=this指向" target="_blank" rel="noopener"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&title=this指向" target="_blank" rel="noopener"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&is_video=false&description=this指向" target="_blank" rel="noopener"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=this指向&body=Check out this article: http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&title=this指向" target="_blank" rel="noopener"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&title=this指向" target="_blank" rel="noopener"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&title=this指向" target="_blank" rel="noopener"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&title=this指向" target="_blank" rel="noopener"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2018/08/17/this%E6%8C%87%E5%90%91/&name=this指向&description=" target="_blank" rel="noopener"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
     </div>
-    
-        <div class='side'>
-            <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#this的指向问题"><span class="toc-number">1.</span> <span class="toc-text">this的指向问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#全局环境下"><span class="toc-number">1.1.</span> <span class="toc-text">全局环境下</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作为普通函数直接调用"><span class="toc-number">1.2.</span> <span class="toc-text">作为普通函数直接调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#作为对象的属性调用"><span class="toc-number">1.3.</span> <span class="toc-text">作为对象的属性调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在构造函数中调用"><span class="toc-number">1.4.</span> <span class="toc-text">在构造函数中调用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#call-和-apply"><span class="toc-number">1.5.</span> <span class="toc-text">call 和 apply</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#bind"><span class="toc-number">1.6.</span> <span class="toc-text">bind</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#箭头函数"><span class="toc-number">1.7.</span> <span class="toc-text">箭头函数</span></a></li></ol></li></ol>
-        </div>
-    
-</div>
 
-
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
     </div>
+
+  </div>
 </div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2019 Zhu Xue
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="http://github.com/gabithume" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
 </body>
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
-<script src="/js/plugin.js"></script>
-<script src="/js/diaspora.js"></script>
-<link rel="stylesheet" href="/photoswipe/photoswipe.css">
-<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
-<script src="/photoswipe/photoswipe.min.js"></script>
-<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
-
-<!-- Root element of PhotoSwipe. Must have class pswp. -->
-<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
-    <!-- Background of PhotoSwipe. 
-         It's a separate element as animating opacity is faster than rgba(). -->
-    <div class="pswp__bg"></div>
-    <!-- Slides wrapper with overflow:hidden. -->
-    <div class="pswp__scroll-wrap">
-        <!-- Container that holds slides. 
-            PhotoSwipe keeps only 3 of them in the DOM to save memory.
-            Don't modify these 3 pswp__item elements, data is added later on. -->
-        <div class="pswp__container">
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-            <div class="pswp__item"></div>
-        </div>
-        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
-        <div class="pswp__ui pswp__ui--hidden">
-            <div class="pswp__top-bar">
-                <!--  Controls are self-explanatory. Order can be changed. -->
-                <div class="pswp__counter"></div>
-                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
-                <button class="pswp__button pswp__button--share" title="Share"></button>
-                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
-                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
-                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
-                <!-- element will get class pswp__preloader--active when preloader is running -->
-                <div class="pswp__preloader">
-                    <div class="pswp__preloader__icn">
-                      <div class="pswp__preloader__cut">
-                        <div class="pswp__preloader__donut"></div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
-                <div class="pswp__share-tooltip"></div> 
-            </div>
-            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
-            </button>
-            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
-            </button>
-            <div class="pswp__caption">
-                <div class="pswp__caption__center"></div>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-
-
 </html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
