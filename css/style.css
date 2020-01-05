@@ -648,7 +648,7 @@ body {
   }
 }
 #header-post {
-  position: fixed;
+  position: absolute;
   top: 2rem;
   right: 2rem;
   display: inline-block;
@@ -765,7 +765,7 @@ body {
 }
 #header-post #toc {
   clear: both;
-  text-align: right;
+  text-align: left;
   padding-top: 1rem;
   max-width: 20em;
   float: right;
