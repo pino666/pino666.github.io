@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="本文参考于React官方文档，仅供学习使用～  Hooks特征: 1.完全可选。 2.100% 向后兼容的。  3.现在即可使用。Hook 是一些可以让你在函数组件里“钩入” React state 及生命周期等特性的函数。Hook 不能在 class 组件中使用，所以不推荐把你已有的组件全部重写，但是你可以立即在新组件里直接开始使用 Hook。 Hook 使用规则Hook 就是 JavaScri">
+<meta name="keywords" content="-JavaScrip  -React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React-Hooks 文档笔记">
+<meta property="og:url" content="http:&#x2F;&#x2F;yoursite.com&#x2F;2020&#x2F;05&#x2F;19&#x2F;React-Hooks&#x2F;index.html">
+<meta property="og:site_name" content="pino">
+<meta property="og:description" content="本文参考于React官方文档，仅供学习使用～  Hooks特征: 1.完全可选。 2.100% 向后兼容的。  3.现在即可使用。Hook 是一些可以让你在函数组件里“钩入” React state 及生命周期等特性的函数。Hook 不能在 class 组件中使用，所以不推荐把你已有的组件全部重写，但是你可以立即在新组件里直接开始使用 Hook。 Hook 使用规则Hook 就是 JavaScri">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-05-20T09:19:27.070Z">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>React-Hooks 文档笔记</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pino666" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/06/14/%E7%BB%8F%E5%85%B8%E7%AE%97%E6%B3%95/"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/05/11/leetcode%E5%88%B7%E9%A2%98%E5%B0%8F%E8%AE%B02/"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/05/19/React-Hooks/" target="_blank" rel="noopener"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/05/19/React-Hooks/&text=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/05/19/React-Hooks/&title=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/05/19/React-Hooks/&is_video=false&description=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=React-Hooks 文档笔记&body=Check out this article: http://yoursite.com/2020/05/19/React-Hooks/"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/05/19/React-Hooks/&title=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/05/19/React-Hooks/&title=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/05/19/React-Hooks/&title=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/05/19/React-Hooks/&title=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/05/19/React-Hooks/&name=React-Hooks 文档笔记&description=" target="_blank" rel="noopener"><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hooks"><span class="toc-number">1.</span> <span class="toc-text">Hooks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hook-使用规则"><span class="toc-number">2.</span> <span class="toc-text">Hook 使用规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-useState"><span class="toc-number">3.</span> <span class="toc-text">1.useState</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-useEffect"><span class="toc-number">4.</span> <span class="toc-text">2.useEffect</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        React-Hooks 文档笔记
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">pino</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-05-19T07:02:08.000Z" itemprop="datePublished">2020-05-19</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/JavaScrip-React/" rel="tag">-JavaScrip  -React</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <blockquote><p>本文参考于React官方文档，仅供学习使用～</p>
+</blockquote>
+<h2 id="Hooks"><a href="#Hooks" class="headerlink" title="Hooks"></a>Hooks</h2><p><font color="#dd0000">特征: 1.完全可选。 2.100% 向后兼容的。  3.现在即可使用。</font><br>Hook 是一些可以让你在函数组件里“钩入” React state 及生命周期等特性的函数。Hook 不能在 class 组件中使用，所以不推荐把你已有的组件全部重写，但是你可以立即在新组件里直接开始使用 Hook。</p>
+<h2 id="Hook-使用规则"><a href="#Hook-使用规则" class="headerlink" title="Hook 使用规则"></a>Hook 使用规则</h2><p>Hook 就是 JavaScript 函数，但是使用它们会有两个额外的规则：</p>
+<ol>
+<li><font color="#dd0000">只能在函数最外层调用 Hook。</font>不要在循环、条件判断或者子函数中调用。</li>
+<li><font color="#dd0000">只能在 React 的函数组件中调用 Hook，</font>不要在其他 JavaScript 函数中调用。<br>注：<a href='https://www.npmjs.com/package/eslint-plugin-react-hooks' target="_blank" rel="noopener">eslint-plugin-react-hooks</a>插件可自动执行这些规则。</li>
+</ol>
+<h2 id="1-useState"><a href="#1-useState" class="headerlink" title="1.useState"></a>1.useState</h2><p>useState 是一个 Hook, 为通过在函数组件里调用它来给组件添加一些内部 state。React 会在重复渲染时保留这个 state。<br>useState 会返回一对值：当前状态和一个让你更新它的函数。它类似 class 组件的 this.setState，但是<font color="#dd0000">它不会把新的 state 和旧的 state 进行合并</font>。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">import React, &#123; useState &#125; from &apos;react&apos;;  // 引入 React 中的 useState Hook。它让我们在函数组件中存储内部 state。</span><br><span class="line"></span><br><span class="line">// 可以在一个组件中多次使用 useState</span><br><span class="line">const [count, setCount] = useState(0);  // 声明state变量</span><br><span class="line">const [fruit, setFruit] = useState(&apos;banana&apos;);</span><br><span class="line">const [todos, setTodos] = useState([&#123; text: &apos;Learn Hooks&apos; &#125;]);</span><br><span class="line"></span><br><span class="line">&lt;p&gt;You clicked &#123;count&#125; times&lt;/p&gt;  // 读取 State</span><br><span class="line">&lt;button onClick=&#123;() =&gt; setCount(count + 1)&#125;&gt;  // 更新 State</span><br><span class="line">    Click me</span><br><span class="line">&lt;/button&gt;</span><br></pre></td></tr></table></figure><br>值得注意的是，不同于 this.state，这里的 state 不一定要是一个对象(可以是别的类型)。</p>
+<li><font color="#dd0000">调用 useState 方法的时候做了什么? </font>它定义一个 “state 变量”。变量名由可以任意自定义，这是一种在函数调用时保存变量的方式 —— useState 是一种新方法，它与 class 里面的 this.state 提供的功能完全相同。一般来说，在函数退出后变量就会”消失”，而 state 中的变量会被 React 保留。</li><br><li><font color="#dd0000">useState 需要哪些参数？ </font>useState 唯一的参数就是初始 state。这个初始 state 参数只有在<font color="#dd0000">第一次渲染时</font>会被用到。</li><br><li><font color="#dd0000">useState 方法的返回值是什么？</font>返回值为：当前 state 以及更新 state 的函数。这与 class 里面 this.state.count 和 this.setState 类似，唯一区别就是你需要成对的获取它们。</li><br><li><font color="#dd0000">方括号有什么用？</font>这种 JavaScript 语法叫数组解构。当我们使用 useState 定义 state 变量的时候，它返回一个有两个值的数组。第一个值是当前的 state，第二个值是更新 state 的函数。使用 [0] 和 [1] 来访问有点令人困惑，因为它们有特定的含义。所以使用了数组解构。</li>
+
+<h2 id="2-useEffect"><a href="#2-useEffect" class="headerlink" title="2.useEffect"></a>2.useEffect</h2><p><font color="#dd0000">副作用</font>：在 React 组件中执行过数据获取、订阅或者手动修改过 DOM等。<br>而 useEffect 就是为函数组件增加了操作 副作用 的能力。它跟 class 组件中的 componentDidMount、componentDidUpdate 和 componentWillUnmount 具有<font color="#dd0000">相同</font>的用途，只不过被合并成了一个 API。<br>当你调用 useEffect 时，就是在告诉 React 在完成对 DOM 的更改后运行你的“副作用”函数。由于副作用函数是在组件内声明的，所以它们可以访问到组件的 props 和 state。<br>默认情况下，React 会在<font color="#dd0000">每次渲染后调用副作用函数 (包括第一次渲染的时候)。</font><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">// 可以在一个组件中多次使用 useEffect</span><br><span class="line"></span><br><span class="line">function FriendStatusWithCounter(props) &#123;</span><br><span class="line">  const [count, setCount] = useState(0);</span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    document.title = `You clicked $&#123;count&#125; times`;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  const [isOnline, setIsOnline] = useState(null);</span><br><span class="line"></span><br><span class="line">  // 副作用函数还可以通过返回一个函数来指定如何“清除”副作用</span><br><span class="line">  // 这里，React 会在组件销毁时取消对 ChatAPI 的订阅，然后在后续渲染时重新执行副作用函数</span><br><span class="line">  useEffect(() =&gt; &#123;</span><br><span class="line">    ChatAPI.subscribeToFriendStatus(props.friend.id, handleStatusChange);</span><br><span class="line">    return () =&gt; &#123;</span><br><span class="line">      ChatAPI.unsubscribeFromFriendStatus(props.friend.id, handleStatusChange);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  function handleStatusChange(status) &#123;</span><br><span class="line">    setIsOnline(status.isOnline);</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pino666" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Hooks"><span class="toc-number">1.</span> <span class="toc-text">Hooks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hook-使用规则"><span class="toc-number">2.</span> <span class="toc-text">Hook 使用规则</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-useState"><span class="toc-number">3.</span> <span class="toc-text">1.useState</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-useEffect"><span class="toc-number">4.</span> <span class="toc-text">2.useEffect</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=http://yoursite.com/2020/05/19/React-Hooks/" target="_blank" rel="noopener"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=http://yoursite.com/2020/05/19/React-Hooks/&text=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=http://yoursite.com/2020/05/19/React-Hooks/&title=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=http://yoursite.com/2020/05/19/React-Hooks/&is_video=false&description=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=React-Hooks 文档笔记&body=Check out this article: http://yoursite.com/2020/05/19/React-Hooks/"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=http://yoursite.com/2020/05/19/React-Hooks/&title=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=http://yoursite.com/2020/05/19/React-Hooks/&title=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=http://yoursite.com/2020/05/19/React-Hooks/&title=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=http://yoursite.com/2020/05/19/React-Hooks/&title=React-Hooks 文档笔记" target="_blank" rel="noopener"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=http://yoursite.com/2020/05/19/React-Hooks/&name=React-Hooks 文档笔记&description=" target="_blank" rel="noopener"><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2020 Zhu Xue
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a href="https://github.com/pino666" target="_blank" rel="noopener">Projects</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-86660611-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
